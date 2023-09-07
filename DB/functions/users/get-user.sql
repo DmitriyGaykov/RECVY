@@ -11,7 +11,8 @@ begin
         users.age,
         users.role,
         users.regdate,
-        getphotosbyid(users.id)
+        getphotosbyid(users.id),
+        users.login
     into
         user
     from

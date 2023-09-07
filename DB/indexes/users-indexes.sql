@@ -1,0 +1,1 @@
+create unique index unique_users_login_index on users(login);

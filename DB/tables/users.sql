@@ -1,5 +1,6 @@
 create table Users (
     id varchar(50) primary key,
+    login varchar(20) unique,
 
     firstName varchar(20),
     lastName varchar(20),
@@ -16,5 +17,3 @@ create table Users (
 
     foreign key (role) references roles(role)
 );
-
-select unnest(*) from getphotosbyid('iads')
