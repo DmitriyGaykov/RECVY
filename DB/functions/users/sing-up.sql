@@ -102,7 +102,7 @@ begin
     end if;
     exception
         when others then
-            raise notice 'Произошла ошибка: %', SQLERRM;
+            raise exception 'Произошла ошибка: %', SQLERRM;
 end
 $$;
 
@@ -122,6 +122,9 @@ language plpgsql as
 $$
 begin
     return query select * from signUp(login::varchar, firstname::varchar, lastname::varchar, age, password::varchar, photo::varchar);
+    exception
+        when others then
+            raise exception '%', SQLERRM;
 end;
 $$;
 

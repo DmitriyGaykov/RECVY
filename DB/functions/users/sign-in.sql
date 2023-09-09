@@ -23,7 +23,7 @@ begin
     if _id is null then
         raise exception '%', generatenotloggedinerror();
     else
-        return query select _id as id, _login;
+        return query select _id as id, _login as login;
     end if;
 end;
 $$;
@@ -36,5 +36,10 @@ returns table (
 language plpgsql as $$
 begin
     return query select * from signIn(_login::varchar, _password::varchar);
+    exception
+        when others then
+            raise exception '%', SQLERRM;
 end;
 $$;
+
+select * from signin('123123123', '123123123');
