@@ -1,4 +1,4 @@
-create or replace function getUser(_id varchar(50))
+create or replace function getUserById(_id varchar(50))
 returns usertype as $$
 declare
     user usertype;
@@ -23,3 +23,5 @@ begin
     return user;
 end;
 $$ language plpgsql;
+
+select * from getUserById('xw4p6RB8232cXS06Ex2M10KKv4VQ9zNUTCrDOg6GxVkNkJLOfA')

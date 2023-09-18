@@ -65,3 +65,13 @@ begin
     return (select count(*) from users where users.login = _login);
 end;
 $$ language plpgsql;
+
+create or replace function checkAboutMe(_about_me varchar(300))
+returns boolean
+as $$
+    declare
+        length int :=  length(_about_me);
+begin
+    return $1 is null or length < 300;
+end;
+$$ language plpgsql;
