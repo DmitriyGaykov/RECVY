@@ -5,23 +5,24 @@ declare
 begin
     select
         users.id,
+        users.login,
         users.firstname,
         users.lastname,
         users.aboutme,
         users.age,
-        users.role,
+        getrolesof(_id),
         users.regdate,
-        getphotosbyid(users.id),
-        users.login
+        getphotosbyid(users.id)
     into
         user
     from
         users
     where
-        users.id = id;
+        users.id = _id;
 
     return user;
 end;
 $$ language plpgsql;
 
-select * from getUserById('xw4p6RB8232cXS06Ex2M10KKv4VQ9zNUTCrDOg6GxVkNkJLOfA')
+select *
+from getUserById('YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI');

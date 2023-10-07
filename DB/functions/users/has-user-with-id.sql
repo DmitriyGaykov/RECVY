@@ -16,3 +16,5 @@ begin
     return count != 0;
 end;
 $$ language plpgsql;
+
+select hasUserWithId('lTr4V5hgLwEs1xXPjEEi7MH19iCyu7t2ZpoYCtht27BN1PGX4');

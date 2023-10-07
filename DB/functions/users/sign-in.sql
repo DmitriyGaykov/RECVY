@@ -1,12 +1,10 @@
 create or replace function signIn(_login varchar(20), _password varchar(256))
-returns table (
-    id varchar(50),
-    login varchar(20)
-)
+returns varchar(50)
 language plpgsql as $$
 declare
     hash text;
     _id varchar = null;
+    reason varchar(300) = null;
 begin
     hash := tohash(_password);
 
@@ -23,22 +21,15 @@ begin
     if _id is null then
         raise exception '%', generatenotloggedinerror();
     else
-        return query select _id as id, _login as login;
+        reason = checkuserwasbanned(_id);
+
+        if reason is null then
+            return _id;
+        end if;
+
+        raise exception '%', generateyouareblockederror(reason);
     end if;
 end;
 $$;
 
-create or replace function signIn(_login text, _password text)
-returns table (
-    id varchar(50),
-    login varchar(20)
-)
-language plpgsql as $$
-begin
-    return query select * from signIn(_login::varchar, _password::varchar);
-    exception
-        when others then
-            raise exception '%', SQLERRM;
-end;
-$$;
-
+select * from signIn('111111', '123123123');

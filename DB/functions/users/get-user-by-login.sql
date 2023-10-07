@@ -1,8 +1,5 @@
 create or replace function getUserByLogin(_login varchar(20))
-returns table (
-    login varchar(20),
-    password varchar(256)
-)
+returns setof loginpasswordview
 as $$
 begin
     return query (
@@ -15,3 +12,5 @@ begin
         users.login = _login);
 end;
 $$ language plpgsql;
+
+select * from getUserByLogin('123123123');

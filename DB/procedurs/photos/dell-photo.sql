@@ -8,3 +8,6 @@ begin
                photo = $2;
 end;
 $$;
+
+select * from photos;
+call dellPhoto('YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI', 'hel2lo.png');

@@ -16,3 +16,5 @@ begin
     return count != 0;
 end;
 $$ language plpgsql;
+
+select isSubscribingExist('81L086RIcklaeZJUciC6zJDUS1q565x1N28V799gazpCTmcD22', 'YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI');

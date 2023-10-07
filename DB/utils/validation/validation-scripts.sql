@@ -75,3 +75,22 @@ begin
     return $1 is null or length < 300;
 end;
 $$ language plpgsql;
+
+create or replace function checkUserWasBanned(id varchar(50))
+returns varchar
+as $$
+    declare
+        _reason varchar(300) = null;
+begin
+    select
+        reason
+    into
+        _reason
+    from
+        blockedusers
+    where
+        userid = id;
+
+    return _reason;
+end;
+$$ language plpgsql;

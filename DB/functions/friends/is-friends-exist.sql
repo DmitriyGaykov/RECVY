@@ -12,3 +12,6 @@ begin
             (friends.iduser1 = $2 and friends.iduser2 = $1));
 end;
 $$ language plpgsql;
+
+
+select isFriendsExist('231', '12312');

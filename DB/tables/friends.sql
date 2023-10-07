@@ -4,6 +4,6 @@ create table friends (
 
     foreign key (idUser1) references users(id),
     foreign key (idUser2) references users(id)
-);
+) tablespace DataTablespace;
 
 drop table Friends;

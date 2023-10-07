@@ -4,4 +4,4 @@ create table UsersRoles (
 
   foreign key (userId) references users(id),
   foreign key (role) references roles(role)
-);
+) tablespace systemtablespace;

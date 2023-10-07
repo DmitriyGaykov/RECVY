@@ -6,10 +6,7 @@ create or replace function signUp(
     password varchar(256),
     photo varchar(1000) = null
 )
-returns table (
-    _id varchar(50),
-    _login varchar(20)
-)
+returns varchar(50)
 language plpgsql as $$
 declare
     _exception text = '';
@@ -98,7 +95,7 @@ begin
             call addphoto(id, photo);
         end if;
 
-        return query select id as _id, login;
+        return id;
     end if;
     exception
         when others then
@@ -106,25 +103,5 @@ begin
 end
 $$;
 
-create or replace function signUp(
-    login text,
-    firstname text,
-    lastname text,
-    age integer,
-    password text,
-    photo text = null
-)
-returns table (
-    _id varchar(50),
-    _login varchar(20)
-)
-language plpgsql as
-$$
-begin
-    return query select * from signUp(login::varchar, firstname::varchar, lastname::varchar, age, password::varchar, photo::varchar);
-    exception
-        when others then
-            raise exception '%', SQLERRM;
-end;
-$$;
+select * from signUp('111111', 'Andrey','Shevtsov', 12, '123123123');
 

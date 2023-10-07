@@ -9,7 +9,7 @@ create or replace procedure editUserInfo(
 begin
     if $2 is not null then
         if not checknameandlastname($2) then
-            raise '%', generatenameerror();
+            raise exception '%', generatenameerror();
         end if;
 
         update
@@ -22,7 +22,7 @@ begin
 
     if $3 is not null then
         if not checknameandlastname($3) then
-            raise '%', generatenameerror();
+            raise exception '%', generatenameerror();
         end if;
 
         update
@@ -35,7 +35,7 @@ begin
 
     if $4 is not null then
         if not checkpassword($4) then
-            raise '%', generatepassworderror();
+            raise exception '%', generatepassworderror();
         end if;
 
         update
@@ -57,7 +57,7 @@ begin
 
     if $6 is not null then
         if not checkage($6) then
-            raise '%', generateageerror();
+            raise exception '%', generateageerror();
         end if;
 
         update
@@ -74,3 +74,6 @@ begin
             raise exception '%', sqlerrm;
 end;
 $$;
+
+call editUserInfo('YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI', _firstname := 'Dimona');
+select * from getusers();

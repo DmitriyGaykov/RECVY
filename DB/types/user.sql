@@ -5,7 +5,7 @@ create type UserType as (
     lastName varchar(20),
     aboutMe varchar(300),
     age integer,
-    role varchar(20),
+    role varchar(20)[],
     regDate timestamp,
     photos varchar(1000)[]
 );

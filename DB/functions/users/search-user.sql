@@ -23,3 +23,5 @@ begin
             raise exception '%', SQLERRM;
 end;
 $$ language plpgsql;
+
+select * from searchUser('i');

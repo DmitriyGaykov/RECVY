@@ -1,1 +1,1 @@
-create index idx_photos_userId on photos(userid);
+create index idx_photos_userId on photos(userid) tablespace indextablespace;

@@ -16,4 +16,4 @@ create table Users (
     role varchar(20) default 'user',
 
     foreign key (role) references roles(role)
-);
+) tablespace DataTablespace;

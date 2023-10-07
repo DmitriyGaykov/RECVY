@@ -1,0 +1,1 @@
+create view ForSigningInUserInfo as select id, login from users;

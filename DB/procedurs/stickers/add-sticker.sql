@@ -22,3 +22,5 @@ begin
     insert into stickers values (_id, $1);
 end
 $$;
+
+call addSticker('sticker.png');

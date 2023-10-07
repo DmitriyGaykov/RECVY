@@ -30,3 +30,14 @@ begin
         );
 end;
 $$ language plpgsql;
+
+create or replace function generateYouAreBlockedError(reason text)
+returns text
+as $$
+begin
+    return generateexception(
+        'error',
+        'Данный пользователь заблокирован. Причина: ' || reason
+        );
+end;
+$$ language plpgsql;

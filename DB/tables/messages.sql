@@ -15,6 +15,6 @@ create table Messages (
   foreign key (idUserTo) references users(id),
 
   foreign key (messageType) references messagestypes(type)
-);
+) tablespace DataTablespace;
 
 drop table Messages;

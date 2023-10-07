@@ -17,3 +17,5 @@ begin
             raise exception '%', sqlerrm;
 end;
 $$ language plpgsql;
+
+select * from getMessages('23123', '1231231');

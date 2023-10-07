@@ -4,6 +4,6 @@ create table Subscribers (
 
     foreign key (subscriber) references users(id),
     foreign key (subscribeTo) references users(id)
-);
+) tablespace DataTablespace;
 
 drop table Subscribers;

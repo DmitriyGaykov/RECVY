@@ -3,6 +3,6 @@ create table Photos (
   photo varchar(1000) unique,
 
   foreign key (userId) references users(id)
-);
+) tablespace DataTablespace;
 
 drop table Photos;
