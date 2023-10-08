@@ -87,4 +87,26 @@ describe('UsersDbService', () => {
       expect(err.error).toBeDefined();
     }
   })
+
+  it('should return a user with id', async () => {
+    try {
+      const id = 'YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI'
+      const user = await service.getUserById(id)
+
+      expect(user).toBeDefined();
+      expect(user.id).toEqual(id);
+      expect(user.firstname).toBeDefined();
+    } catch (e : unknown) {
+      expect(e).toBeUndefined();
+    }
+  })
+
+  it('should be return error', async () => {
+    try {
+      const id = 'YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJ7SsC7B4Pf8zP7fI'
+      await service.getUserById(id)
+    } catch (e: any) {
+      expect(e.id).toBeDefined();
+    }
+  })
 });

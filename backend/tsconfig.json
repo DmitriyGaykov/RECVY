@@ -24,7 +24,8 @@
       "@models": ["src/db/models"],
       "@decorators": ["src/decorators"],
       "@utils": ["src/utils"],
-      "@pipes": ["src/pipes"]
+      "@pipes": ["src/pipes"],
+      "@guards": ["src/guards"]
     }
   }
 }

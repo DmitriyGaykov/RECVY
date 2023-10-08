@@ -7,6 +7,6 @@ export class User {
   aboutme: string;
   age: number;
   regdate: Date;
-  roles: string[];
+  role: string[];
   photos: string[];
 }
