@@ -9,6 +9,7 @@ grant select on photos to RL_VISITOR;
 grant select on blockedusers to RL_VISITOR;
 grant select on roles to RL_VISITOR;
 grant select on usersroles to RL_VISITOR;
+grant insert on usersroles to RL_VISITOR;
 grant execute on procedure setuserrole to RL_VISITOR;
 
 grant execute on FUNCTION signin to RL_VISITOR;
