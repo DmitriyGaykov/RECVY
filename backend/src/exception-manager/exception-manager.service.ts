@@ -17,6 +17,18 @@ export class ExceptionManagerService {
     return fieldErrors;
   }
 
+  generateNotAuthError() : IFieldError {
+    return {
+      error: 'Пользователь не авторизован'
+    }
+  }
+
+  generateFieldError(key: string, value: string) : IFieldError {
+    return {
+      [key]: value
+    }
+  }
+
   static generateException(key : string, value : string) : string {
     return `${key}:${value}`
   }

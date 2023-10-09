@@ -5,18 +5,16 @@ import { JwtModule } from "@nestjs/jwt";
 import { UsersModule } from "../users/users.module";
 import { NestjsFormDataModule } from "nestjs-form-data";
 import { FilesService } from "../files/files.service";
+import { AppJwtModule } from "./jwt/jwt.module";
 
 @Module({
   imports: [
-    JwtModule.register({
-      secret: "Hello mir, manera crutit mir",
-      signOptions: {
-        expiresIn: '7d'
-      }}),
+    AppJwtModule,
     UsersModule,
     NestjsFormDataModule
   ],
   providers: [AuthService, FilesService],
-  controllers: [AuthController]
+  controllers: [AuthController],
+  exports: [AppJwtModule]
 })
 export class AuthModule {}

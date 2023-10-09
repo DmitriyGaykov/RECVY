@@ -1,8 +1,8 @@
-import { applyDecorators, SetMetadata, UseGuards } from "@nestjs/common";
+import { applyDecorators, CanActivate, SetMetadata, Type, UseGuards } from "@nestjs/common";
 import { Roles } from "../../users/roles";
 import { AuthGuard } from "@guards";
 
-export const AuthAs = (role : Roles) => applyDecorators(
+export const AuthAs = (role : Roles, guards: Type<CanActivate>[] | CanActivate[] = []) => applyDecorators(
   SetMetadata('auth-as', role),
-  UseGuards(AuthGuard)
+  UseGuards(AuthGuard, ...guards)
 );

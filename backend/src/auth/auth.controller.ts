@@ -2,11 +2,10 @@ import { BadRequestException, Body, Controller, Post, UseGuards, UsePipes } from
 import { SignUpDto } from "./dto/sign-up.dto";
 import { FormDataRequest } from "nestjs-form-data";
 import { AuthService, Token } from "./auth.service";
-import { AuthAs, InjectUser, UploadFile } from "@decorators";
+import { InjectUser, UploadFile } from "@decorators";
 import { AppValidationPipe } from "@pipes";
 import { SignInDto } from "./dto/sign-in.dto";
 import { User } from "@models";
-import { Roles } from "../users/roles";
 import { AuthGuard } from "@guards";
 
 @Controller('auth')

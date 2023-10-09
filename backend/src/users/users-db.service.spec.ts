@@ -11,7 +11,7 @@ describe('UsersDbService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [DbModule.register('visitor'), ExceptionManagerModule],
+      imports: [DbModule.register('app-user'), DbModule.register('visitor'), ExceptionManagerModule],
       providers: [UsersDbService, ExceptionManagerService],
     }).compile();
 
@@ -107,6 +107,105 @@ describe('UsersDbService', () => {
       await service.getUserById(id)
     } catch (e: any) {
       expect(e.id).toBeDefined();
+    }
+  })
+
+  it('get users should be returned array', async () => {
+    try {
+      const users = await service.getUsers();
+      expect(users).toBeDefined();
+      expect(Array.isArray(users)).toEqual(true);
+    } catch (e : unknown) {
+      expect(e).toBeUndefined();
+    }
+  })
+
+  it('should be returned 2 users', async () => {
+    try {
+      const users = await service.getUsers(0, 2);
+      expect(users).toBeDefined();
+      expect(Array.isArray(users)).toEqual(true);
+      expect(users).toHaveLength(2);
+    } catch (e : unknown) {
+      expect(e).toBeUndefined()
+    }
+  })
+
+  it('should be exception, if skip or take are negative', async () => {
+    try {
+      const users = await service.getUsers(-1, -2);
+      expect(users).toBeUndefined();
+    } catch (e : any) {
+      expect(e).toBeDefined();
+      expect(e.skip).toBeDefined();
+      expect(e.take).toBeDefined();
+    }
+  })
+
+  it('should change name on Vasiliy', async () => {
+    try {
+      const users = await service.getUsers();
+      expect(users).toBeDefined();
+
+      const { id, firstname, lastname } = users.at(0);
+      expect(id).toBeDefined();
+
+      const newName = 'Vasiliy';
+      const user = await service.editUserInfo({id, firstname: newName});
+
+      expect(
+        user.firstname !== firstname &&
+        user.lastname === lastname &&
+        user.firstname === newName
+      ).toEqual(true);
+    } catch (e : unknown) {
+      expect(e).toBeUndefined()
+    }
+  })
+
+  it('should be exception in name', async () => {
+    try {
+      const users = await service.getUsers();
+      expect(users).toBeDefined();
+
+      const { id, firstname, lastname } = users.at(0);
+      expect(id).toBeDefined();
+
+      const newName = 'aaa';
+      const user = await service.editUserInfo({ id, firstname: newName });
+
+      expect(user).toBeUndefined();
+    } catch (e: any) {
+      expect(e).toBeDefined()
+      expect(e.firstname).toBeDefined();
+    }
+  })
+
+  it('should be returned array with users, that consist Dima', async () => {
+    try {
+      const searchtext = 'Dima';
+      const users = await service.searchUsers(searchtext);
+
+      expect(Array.isArray(users)).toEqual(true);
+      expect(users.at(0).firstname === searchtext).toEqual(true)
+    } catch (e : unknown) {
+      expect(e).toBeUndefined();
+    }
+  })
+
+  it('search user by lastname', async () => {
+    try {
+      const users = await service.getUsers();
+      expect(users).toBeDefined();
+
+      const { id, lastname } = users.at(-1);
+      expect(id).toBeDefined();
+
+      const fusers = await service.searchUsers(lastname);
+      expect(fusers).toBeDefined();
+      expect(fusers.filter(el => el.lastname === lastname && id === el.id).length > 0).toEqual(true);
+    } catch (e : unknown) {
+      expect(e).toBeUndefined();
     }
   })
 });

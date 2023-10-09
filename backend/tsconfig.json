@@ -25,7 +25,8 @@
       "@decorators": ["src/decorators"],
       "@utils": ["src/utils"],
       "@pipes": ["src/pipes"],
-      "@guards": ["src/guards"]
+      "@guards": ["src/guards"],
+      "@interceptors": ["src/interceptors"]
     }
   }
 }

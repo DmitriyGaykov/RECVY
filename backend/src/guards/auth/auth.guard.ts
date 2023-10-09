@@ -1,5 +1,4 @@
-import { BadRequestException, CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
-import { Observable } from 'rxjs';
+import { BadRequestException, CanActivate, ExecutionContext, Injectable, Scope } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { UsersService } from "../../users/users.service";
 import { Reflector } from "@nestjs/core";
@@ -23,7 +22,14 @@ export class AuthGuard implements CanActivate {
     if(!jwt)
       throw new BadRequestException();
 
-    const { id } = await this.jwtService.verifyAsync(jwt);
+    let id: string;
+
+    try {
+      const obj = await this.jwtService.verifyAsync(jwt);
+      id = obj.id;
+    } catch {
+      throw new BadRequestException();
+    }
 
     if(!id)
       throw new BadRequestException()
