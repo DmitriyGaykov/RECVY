@@ -39,7 +39,7 @@ export class AuthGuard implements CanActivate {
     req['user'] = user;
 
     if(!role || user.role.includes(role))
-      return true
+      return true;
 
     throw new BadRequestException({ error: 'В доступе отказано!' })
   }

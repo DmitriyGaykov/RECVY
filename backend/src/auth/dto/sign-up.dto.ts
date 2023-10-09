@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString, IsInt } from "class-validator";
 import { ExceptionManagerService } from "../../exception-manager/exception-manager.service";
 
 export class SignUpDto {
@@ -14,8 +14,7 @@ export class SignUpDto {
   @IsString({ message:  ExceptionManagerService.generateException('lastname', 'Поле фамилия должно быть строковым значением')})
   lastname: string;
 
-  @IsNotEmpty({ message: ExceptionManagerService.generateException('age', 'Заполните поле возраст') })
-  @IsNumber({} ,{ message:  ExceptionManagerService.generateException('age', 'Поле возраст должно быть числовым значением')})
+  @IsInt({ message:  ExceptionManagerService.generateException('age', 'Поле возраст должно быть числовым значением')})
   age: number;
 
   @IsNotEmpty({ message: ExceptionManagerService.generateException('password', 'Заполните поле пароль') })
@@ -23,6 +22,5 @@ export class SignUpDto {
   password: string;
 
   @IsOptional()
-  @IsString({ message:  ExceptionManagerService.generateException('photo', 'Поле фото должно быть строковым значением')})
   photo?: string;
 }

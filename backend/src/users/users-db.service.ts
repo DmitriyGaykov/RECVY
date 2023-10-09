@@ -19,7 +19,7 @@ export class UsersDbService {
     try {
       userdto.photo ??= null;
       const resp = await this.vis_pgp.one('select * from signUp(${login}, ${firstname}, ${lastname}, ${age}, ${password}, ${photo})', userdto);
-      return resp;
+      return resp.signup;
     } catch (e : unknown) {
       const err = e as IError;
       throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);
@@ -28,7 +28,7 @@ export class UsersDbService {
   async signIn(signInDto : SignInDto) : Promise<string> {
     try {
       const resp = await this.vis_pgp.one('select * from signIn(${login}, ${password})', signInDto);
-      return resp;
+      return resp.signin;
     } catch (e : unknown) {
       const err = e as IError;
       throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);

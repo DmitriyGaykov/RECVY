@@ -6,6 +6,9 @@ import { UsersModule } from "../users/users.module";
 import { NestjsFormDataModule } from "nestjs-form-data";
 import { FilesService } from "../files/files.service";
 import { AppJwtModule } from "./jwt/jwt.module";
+import { PhotosService } from "../photos/photos.service";
+import { PhotosDbService } from "../photos/photos-db.service";
+import { PhotosModule } from "../photos/photos.module";
 
 @Module({
   imports: [

@@ -5,6 +5,7 @@ import { ExceptionManagerModule } from './exception-manager/exception-manager.mo
 import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
+import { PhotosModule } from "./photos/photos.module";
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { join } from "path";
     AuthModule,
     ExceptionManagerModule,
     FilesModule,
+    PhotosModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public')
     })

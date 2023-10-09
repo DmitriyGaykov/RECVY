@@ -1,6 +1,6 @@
 import { BadRequestException, Body, Controller, Post, UseGuards, UsePipes } from "@nestjs/common";
 import { SignUpDto } from "./dto/sign-up.dto";
-import { FormDataRequest } from "nestjs-form-data";
+import { FormDataRequest, MemoryStoredFile } from "nestjs-form-data";
 import { AuthService, Token } from "./auth.service";
 import { InjectUser, UploadFile } from "@decorators";
 import { AppValidationPipe } from "@pipes";
@@ -17,7 +17,7 @@ export class AuthController {
   @Post('reg')
   @UsePipes(AppValidationPipe)
   @FormDataRequest()
-  async signUp(@Body() signUpDto : SignUpDto, @UploadFile('photo') photo) : Promise<Token> {
+  async signUp(@Body() signUpDto : SignUpDto, @UploadFile('photo') photo : MemoryStoredFile) : Promise<Token> {
       return await this.authService.signUp(signUpDto, photo);
   }
 

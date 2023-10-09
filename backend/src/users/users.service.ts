@@ -6,6 +6,7 @@ import { User } from "@models";
 import { getSkipAndTake } from "@utils";
 import { NullableUser } from "./interfaces/nullable-user.interface";
 import { ExceptionManagerService } from "../exception-manager/exception-manager.service";
+import { FilesService } from "../files/files.service";
 
 @Injectable()
 export class UsersService {
@@ -13,7 +14,8 @@ export class UsersService {
 
   constructor(
     private readonly usersDbService : UsersDbService,
-    private readonly exceptionManagerService : ExceptionManagerService
+    private readonly exceptionManagerService : ExceptionManagerService,
+    private readonly filesService : FilesService
   ) {}
 
   async addUser(userDto : SignUpDto) : Promise<string> {
@@ -34,7 +36,8 @@ export class UsersService {
 
   async getUserById(id: string) : Promise<User> {
     try {
-      return await this.usersDbService.getUserById(id);
+      const user = await this.usersDbService.getUserById(id);
+      return this.changePhotoPathFor(user);
     } catch (e : unknown) {
       throw new BadRequestException(e);
     }
@@ -43,7 +46,8 @@ export class UsersService {
   async getUsers(page?: number) : Promise<User[]> {
     try {
       const { skip, take } = getSkipAndTake(page, UsersService.CNT_USER_FOR_TIME);
-      return await this.usersDbService.getUsers(skip, take);
+      const users = await this.usersDbService.getUsers(skip, take);
+      return users.map(user => this.changePhotoPathFor(user));
     } catch (e : unknown) {
       throw new BadRequestException(e);
     }
@@ -51,7 +55,8 @@ export class UsersService {
 
   async editUserInfo(user : NullableUser) : Promise<User> {
     try {
-      return await this.usersDbService.editUserInfo(user);
+      const _user = await this.usersDbService.editUserInfo(user);
+      return this.changePhotoPathFor(_user);
     } catch (e : unknown) {
       throw new BadRequestException(e);
     }
@@ -63,9 +68,17 @@ export class UsersService {
         throw this.exceptionManagerService.generateFieldError('searchText', 'Поисковая строка не должна быть пустой')
       }
       const { skip, take } = getSkipAndTake(page, UsersService.CNT_USER_FOR_TIME);
-      return await this.usersDbService.searchUsers(text, skip, take);
+      const users = await this.usersDbService.searchUsers(text, skip, take);
+      return users.map(user => this.changePhotoPathFor(user));
     } catch (e : unknown) {
       throw new BadRequestException(e);
     }
+  }
+
+  private changePhotoPathFor(user : User) : User {
+    if(user.photos) {
+      user.photos = user.photos.map(ph => this.filesService.getNameForUserImg(ph))
+    }
+    return user;
   }
 }

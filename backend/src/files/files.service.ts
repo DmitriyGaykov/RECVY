@@ -7,9 +7,9 @@ import * as path from "path";
   scope: Scope.REQUEST
 })
 export class FilesService {
-  static readonly materialsPath : string = path.resolve(__dirname, '../../public/img/users')
+  static readonly usersPath : string = path.resolve(__dirname, '../../public/img/users')
   async saveUserFile(file : MemoryStoredFile) : Promise<void> {
-    return fs.promises.writeFile(path.resolve(FilesService.materialsPath, file.originalName), file.buffer)
+    return fs.promises.writeFile(path.resolve(FilesService.usersPath, file.originalName), file.buffer)
   }
 
   rename(file : MemoryStoredFile, newName : string) : void {
@@ -21,10 +21,10 @@ export class FilesService {
   }
 
   async deleteUserFile(name : string) : Promise<void> {
-    return fs.promises.unlink(path.resolve(FilesService.materialsPath, name))
+    return fs.promises.unlink(path.resolve(FilesService.usersPath, name))
   }
 
   getNameForUserImg(name : string) : string {
-    return `/img/materials/${name}`
+    return `/img/users/${name}`
   }
 }

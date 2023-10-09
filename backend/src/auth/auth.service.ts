@@ -6,6 +6,7 @@ import { MemoryStoredFile } from "nestjs-form-data";
 import { FilesService } from "../files/files.service";
 import { generateString } from "@utils";
 import { SignInDto } from "./dto/sign-in.dto";
+import { PhotosService } from "../photos/photos.service";
 
 export type Token = string
 
@@ -34,13 +35,5 @@ export class AuthService {
   async signIn(signInDto : SignInDto) : Promise<Token> {
     const id  = await this.usersService.signIn(signInDto);
     return await this.jwtService.signAsync({id});
-  }
-
-  async signInWithToken(token : string) {
-    if(!token) {
-      throw new BadRequestException()
-    }
-
-    const obj = await this.jwtService.verifyAsync(token);
   }
 }
