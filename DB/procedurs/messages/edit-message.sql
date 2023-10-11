@@ -12,7 +12,8 @@ begin
     update
         messages
     set
-        message = newvalue
+        message = newvalue,
+        isedited = true
     where
         messageid = id;
 end;

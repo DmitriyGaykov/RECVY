@@ -14,8 +14,12 @@ begin
     if my_id = _subscribeTo then
         raise exception '%', generateyourselfsubscribeerror();
     end if;
+
     if issubscribingexist(my_id, _subscribeTo) then
         raise exception '%', generateexistsubscribeerror();
+    end if;
+    if issubscribingexist(_subscribeTo, my_id) then
+        raise exception '%', generateexception('error', 'Пользователь подписан на вас');
     end if;
 
     if isfriendsexist(my_id, _subscribeTo) then
@@ -25,5 +29,7 @@ begin
     insert into subscribers(subscriber, subscribeto) values (my_id, _subscribeTo);
 end
 $$;
+
+select * from getusers();
 
 call subscribe('81L086RIcklaeZJUciC6zJDUS1q565x1N28V799gazpCTmcD22', 'YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI');

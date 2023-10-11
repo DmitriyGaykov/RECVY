@@ -15,6 +15,8 @@ grant execute on procedure setuserrole to RL_VISITOR;
 grant execute on FUNCTION signin to RL_VISITOR;
 grant execute on FUNCTION signup to RL_VISITOR;
 
+select * from getusers()
+
 insert into usersroles(userid, role) values ('emI7j4Bjo5ol8e839YzCbJV2wGW6Tbs1deZlp1K1Z3a2I6R41F', 'user');
 
 revoke all privileges on all tables in schema public from RL_VISITOR;

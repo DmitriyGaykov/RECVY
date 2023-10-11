@@ -9,9 +9,12 @@ export class IsThisUserInterceptor implements NestInterceptor {
   ) {}
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const req = context.switchToHttp().getRequest();
-    const { id } = req.body;
+    const { id, iduserfrom } = req.body;
 
-    if(!id || id !== req['user'].id) {
+    if(
+      (id && id !== req['user'].id) ||
+      (iduserfrom && iduserfrom !== req['user'].id)
+    ) {
       throw new BadRequestException(this.exceptionManagerService.generateNotAuthError());
     }
 

@@ -6,6 +6,9 @@ import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
 import { PhotosModule } from "./photos/photos.module";
+import { SubscribersModule } from './subscribers/subscribers.module';
+import { FriendsModule } from './friends/friends.module';
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
   imports: [
@@ -16,7 +19,10 @@ import { PhotosModule } from "./photos/photos.module";
     PhotosModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public')
-    })
+    }),
+    SubscribersModule,
+    FriendsModule,
+    MessagesModule
   ],
 })
 export class AppModule {}

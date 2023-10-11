@@ -18,4 +18,4 @@ begin
 end;
 $$ language plpgsql;
 
-select * from getMessages('23123', '1231231');
+select * from messages;

@@ -23,7 +23,7 @@ begin
 
     begin
         insert into friends (iduser1, iduser2) values (who, whom);
-        call discribe(whom, who);
+        call describe(whom, who);
 
         exception
             when others then
@@ -32,5 +32,8 @@ begin
     end;
 end;
 $$;
+
+select * from friends;
+select * from subscribers;
 
 call addFriend('YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI', '81L086RIcklaeZJUciC6zJDUS1q565x1N28V799gazpCTmcD22');
