@@ -1,10 +1,10 @@
-import { Body, Controller, Post, UseInterceptors, UsePipes } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, UseInterceptors, UsePipes } from "@nestjs/common";
 import { MessagesService } from './messages.service';
-import { AuthAs } from '@decorators';
+import { AuthAs, InjectUser } from "@decorators";
 import { Roles } from '../users/roles';
 import { SendMessageDto } from "./dto/send-message.dto";
-import { Message } from "@models";
-import { AppValidationPipe } from "@pipes";
+import { Message, User } from "@models";
+import { AppValidationPipe, TryParseIntPipe } from "@pipes";
 import { IsThisUserInterceptor } from "@interceptors";
 
 @Controller('messages')
@@ -19,5 +19,13 @@ export class MessagesController {
   @UseInterceptors(IsThisUserInterceptor)
   async sendMessage(@Body() message : SendMessageDto) : Promise<Message> {
     return await this.messagesService.sendMessage(message);
+  }
+
+  @Get()
+  async getMessages(
+    @InjectUser() { id } : User,
+    @Query('iduserto') iduserto : string,
+    @Query('page', TryParseIntPipe) page?: number) : Promise<Message[]> {
+    return await this.messagesService.getMessages(id, iduserto, page);
   }
 }
