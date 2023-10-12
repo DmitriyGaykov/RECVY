@@ -53,12 +53,4 @@ export class MessagesService {
       throw new BadRequestException(e);
     }
   }
-
-  async deleteChat(iduserfrom : string, iduserto : string) : Promise<void> {
-    try {
-      return await this.messagesDbService.deleteChat(iduserfrom, iduserto);
-    } catch (e : unknown) {
-      throw new BadRequestException(e);
-    }
-  }
 }

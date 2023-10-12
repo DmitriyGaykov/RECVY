@@ -18,7 +18,6 @@ import { Message, User } from "@models";
 import { AppValidationPipe, TryParseIntPipe } from "@pipes";
 import { IsThisUserInterceptor } from "@interceptors";
 import { IsSuitDataToDellOrEditMsgGuard } from "@guards";
-import { EditMessageDto } from "./dto/edit-message.dto";
 
 @Controller('messages')
 @AuthAs(Roles.user)
@@ -51,10 +50,8 @@ export class MessagesController {
   @UseGuards(IsSuitDataToDellOrEditMsgGuard)
   async deleteMessage(
     @InjectUser() { id } : User,
-    @Query('messageid') messageid : string,
-    @Query('userid') userid : string
+    @Query('messageid') messageid?: string
   ) : Promise<void> {
-    messageid && await this.messagesService.deleteMessage(messageid);
-    userid && await this.messagesService.deleteChat(id, userid);
+    return await this.messagesService.deleteMessage(messageid);
   }
 }

@@ -60,13 +60,4 @@ export class MessagesDbService {
       throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);
     }
   }
-
-  async deleteChat(iduserfrom : string, iduserto : string) : Promise<void> {
-    try {
-      await this.pgp.none('call dellChat(${iduserfrom}, ${iduserto})', { iduserfrom, iduserto });
-    } catch (e : unknown) {
-      const err = e as IError;
-      throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);
-    }
-  }
 }
