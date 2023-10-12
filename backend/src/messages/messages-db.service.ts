@@ -31,4 +31,42 @@ export class MessagesDbService {
       throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);
     }
   }
+
+  async getMessageById(idmessage : string) : Promise<Message | undefined> {
+    try {
+      if(idmessage == null)
+        return undefined;
+      return await this.pgp.one("select * from getMessageById(${idmessage})", { idmessage });
+    } catch (e : unknown) {
+      const err = e as IError;
+      throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);
+    }
+  }
+
+  async editMessage(idmessage : string, message : string) : Promise<void> {
+    try {
+      await this.pgp.none('call editMessage(${idmessage}, ${message})', { idmessage, message });
+    } catch (e : unknown) {
+      const err = e as IError;
+      throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);
+    }
+  }
+
+  async deleteMessage(idmessage : string) : Promise<void> {
+    try {
+      await this.pgp.none('call dellMessage(${idmessage})', { idmessage });
+    } catch (e : unknown) {
+      const err = e as IError;
+      throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);
+    }
+  }
+
+  async deleteChat(iduserfrom : string, iduserto : string) : Promise<void> {
+    try {
+      await this.pgp.none('call dellChat(${iduserfrom}, ${iduserto})', { iduserfrom, iduserto });
+    } catch (e : unknown) {
+      const err = e as IError;
+      throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);
+    }
+  }
 }

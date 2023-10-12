@@ -14,7 +14,7 @@ export class AppValidationPipe extends ValidationPipe {
   }
   async transform(value: any, metadata: ArgumentMetadata) {
     try {
-      if(value) {
+      if(value && value.age) {
         value.age = Number(value.age?.toString()) || -1;
       }
       return await super.transform(value, metadata);
