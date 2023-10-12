@@ -1,46 +1,39 @@
 import { DynamicModule, InternalServerErrorException, Module, Provider } from "@nestjs/common";
 import * as pg_promise from 'pg-promise'
+import { ConfigService } from "../config/config.service";
 
-
-@Module({
-})
+@Module({})
 export class DbModule {
-  static register(username: string) : DynamicModule {
+  static register(username: string): DynamicModule {
     const pgp = pg_promise();
-    const options = {
-      host: 'localhost',
-      port: 5432,
-      database: 'recvy',
-    };
+    const createProvider = (username : string): Provider => {
+      return {
+        provide: username + '-connection', // Указываем имя провайдера как connectionName
+        useFactory: async (configService: ConfigService) => {
+          const options = {
+            host: configService.get('HOST'),
+            port: parseInt(configService.get('PORT')),
+            database: configService.get('DATABASE'),
+          };
 
-    let pgPromiseProvider : Provider;
+          username =  username.replaceAll('-', '_');
+
+          const connection = {
+            ...options,
+            user: username,
+            password: configService.get(username.toUpperCase())
+          };
+          return pgp(connection);
+        },
+        inject: [ConfigService],
+      };
+    }
+
+    let pgPromiseProvider: Provider;
 
     switch (username) {
-      case 'visitor':
-        pgPromiseProvider = {
-          provide: 'visitor-connection', // Указываем имя провайдера как connectionName
-          useFactory: async () => {
-            const connection = {
-              ...options,
-              user: username,
-              password: '123123123'
-            };
-            return pgp(connection);;
-          },
-        };
-        break;
-      case 'app-user':
-        pgPromiseProvider = {
-          provide: 'app-user-connection', // Указываем имя провайдера как connectionName
-          useFactory: () => {
-            const connection = {
-              ...options,
-              user: 'app_user',
-              password: '123123123'
-            };
-            return pgp(connection);
-          },
-        };
+      case 'visitor': case 'app-user': case 'app-admin':
+        pgPromiseProvider = createProvider(username);
         break;
       default:
         throw new InternalServerErrorException();
@@ -48,8 +41,8 @@ export class DbModule {
 
     return {
       module: DbModule,
-      providers: [pgPromiseProvider],
+      providers: [pgPromiseProvider, ConfigService],
       exports: [pgPromiseProvider],
-    }
+    };
   }
 }

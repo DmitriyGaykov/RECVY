@@ -9,6 +9,7 @@ import { PhotosModule } from "./photos/photos.module";
 import { SubscribersModule } from './subscribers/subscribers.module';
 import { FriendsModule } from './friends/friends.module';
 import { MessagesModule } from './messages/messages.module';
+import { ConfigModule } from './config/config.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { MessagesModule } from './messages/messages.module';
     }),
     SubscribersModule,
     FriendsModule,
-    MessagesModule
+    MessagesModule,
+    ConfigModule
   ],
 })
 export class AppModule {}
