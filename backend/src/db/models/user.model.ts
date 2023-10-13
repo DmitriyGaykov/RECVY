@@ -10,3 +10,5 @@ export class User {
   role: string[];
   photos: string[];
 }
+
+export type BlockedUser = User & { reason: string };

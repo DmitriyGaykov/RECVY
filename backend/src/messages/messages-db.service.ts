@@ -13,7 +13,7 @@ export class MessagesDbService {
 
   async sendMessage(message : SendMessageDto) : Promise<Message> {
     try {
-      return await this.pgp.one("select * from sendMessage(${iduserfrom}, ${iduserto}, ${message}, ${messagetype})", message);
+      return await this.pgp.oneOrNone("select * from sendMessage(${iduserfrom}, ${iduserto}, ${message}, ${messagetype})", message);
     } catch (e : unknown) {
       const err = e as IError;
       throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);
@@ -36,7 +36,7 @@ export class MessagesDbService {
     try {
       if(idmessage == null)
         return undefined;
-      return await this.pgp.one("select * from getMessageById(${idmessage})", { idmessage });
+      return await this.pgp.oneOrNone("select * from getMessageById(${idmessage})", { idmessage });
     } catch (e : unknown) {
       const err = e as IError;
       throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);

@@ -4,8 +4,7 @@ import {
   Injectable,
   ValidationPipe, ValidationPipeOptions
 } from "@nestjs/common";
-import { ExceptionManagerService } from "../../exception-manager/exception-manager.service";
-import { SignUpDto } from "../../auth/dto/sign-up.dto";
+import { ExceptionManagerService } from "../../../exception-manager/exception-manager.service";
 
 @Injectable()
 export class AppValidationPipe extends ValidationPipe {

@@ -1,6 +1,6 @@
 import { BadRequestException, CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
 import { Observable } from 'rxjs';
-import { ExceptionManagerService } from "../../exception-manager/exception-manager.service";
+import { ExceptionManagerService } from "../../../exception-manager/exception-manager.service";
 
 @Injectable()
 export class IsThisUserInterceptor implements NestInterceptor {

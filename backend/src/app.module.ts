@@ -10,6 +10,8 @@ import { SubscribersModule } from './subscribers/subscribers.module';
 import { FriendsModule } from './friends/friends.module';
 import { MessagesModule } from './messages/messages.module';
 import { ConfigModule } from './config/config.module';
+import { AdminModule } from './admin/admin.module';
+import { StickersModule } from './stickers/stickers.module';
 
 @Module({
   imports: [
@@ -24,7 +26,9 @@ import { ConfigModule } from './config/config.module';
     SubscribersModule,
     FriendsModule,
     MessagesModule,
-    ConfigModule
+    ConfigModule,
+    AdminModule,
+    StickersModule
   ],
 })
 export class AppModule {}

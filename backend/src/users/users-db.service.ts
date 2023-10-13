@@ -18,7 +18,7 @@ export class UsersDbService {
   async addUser(userdto : SignUpDto) : Promise<string> {
     try {
       userdto.photo ??= null;
-      const resp = await this.vis_pgp.one('select * from signUp(${login}, ${firstname}, ${lastname}, ${age}, ${password}, ${photo})', userdto);
+      const resp = await this.vis_pgp.oneOrNone('select * from signUp(${login}, ${firstname}, ${lastname}, ${age}, ${password}, ${photo})', userdto);
       return resp.signup;
     } catch (e : unknown) {
       const err = e as IError;
@@ -36,7 +36,7 @@ export class UsersDbService {
   }
   async getUserById(id : string) : Promise<User> {
     try {
-      const resp : User = await this.vis_pgp.one('select * from getUserById(${id})', {id});
+      const resp : User = await this.vis_pgp.oneOrNone('select * from getUserById(${id})', {id});
 
       if(resp.id == null) {
         throw {message: ExceptionManagerService.generateException('id', 'Нет пользователя с таким id')}

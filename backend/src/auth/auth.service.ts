@@ -4,7 +4,7 @@ import { UsersService } from "../users/users.service";
 import { JwtOptionsFactory, JwtService } from "@nestjs/jwt";
 import { MemoryStoredFile } from "nestjs-form-data";
 import { FilesService } from "../files/files.service";
-import { generateString } from "@utils";
+import { generateString } from "../utils/scripts";
 import { SignInDto } from "./dto/sign-in.dto";
 import { PhotosService } from "../photos/photos.service";
 

@@ -22,11 +22,12 @@
     "noUnusedParameters": false,
     "paths": {
       "@models": ["src/db/models"],
-      "@decorators": ["src/decorators"],
-      "@utils": ["src/utils"],
-      "@pipes": ["src/pipes"],
-      "@guards": ["src/guards"],
-      "@interceptors": ["src/interceptors"]
+      "@decorators": ["src/utils/decorators"],
+      "@utils": ["src/utils/scripts"],
+      "@pipes": ["src/utils/pipes"],
+      "@guards": ["src/utils/guards"],
+      "@interceptors": ["src/utils/interceptors"],
+      "@middlewares": ["src/utils/middlewares"],
     }
   }
 }

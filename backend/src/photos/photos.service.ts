@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { MemoryStoredFile } from "nestjs-form-data";
 import { FilesService } from "../files/files.service";
 import { PhotosDbService } from "./photos-db.service";
-import { generateString } from "@utils";
+import { generateString } from "../utils/scripts";
 import { User } from "@models";
 import { ExceptionManagerService } from "../exception-manager/exception-manager.service";
 

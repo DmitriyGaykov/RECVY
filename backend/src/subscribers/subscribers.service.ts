@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { SubscribersDbService } from "./subscribers-db.service";
 import { User } from "@models";
-import { changePhotoPathFor, getSkipAndTake } from "@utils";
+import { changePhotoPathFor, getSkipAndTake } from "../utils/scripts";
 
 @Injectable()
 export class SubscribersService {

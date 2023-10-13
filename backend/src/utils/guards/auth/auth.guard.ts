@@ -1,8 +1,14 @@
-import { BadRequestException, CanActivate, ExecutionContext, Injectable, Scope } from "@nestjs/common";
+import {
+  BadRequestException,
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+} from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { UsersService } from "../../users/users.service";
 import { Reflector } from "@nestjs/core";
-import { Roles } from "../../users/roles";
+import { UsersService } from "../../../users/users.service";
+import { Roles } from "../../../users/roles";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -17,7 +23,8 @@ export class AuthGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const jwt = req.cookies['jwt_recvy'];
 
-    const role = this.reflector.get<Roles>('auth-as', context.getHandler())
+    const role = this.reflector.get<Roles>('auth-as', context.getHandler()) ||
+                 Reflect.getMetadata('auth-as', context.getClass())
 
     if(!jwt)
       throw new BadRequestException();
@@ -41,6 +48,6 @@ export class AuthGuard implements CanActivate {
     if(!role || user.role.includes(role))
       return true;
 
-    throw new BadRequestException({ error: 'В доступе отказано!' })
+    throw new ForbiddenException({ error: 'В доступе отказано!' })
   }
 }

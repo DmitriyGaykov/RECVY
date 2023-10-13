@@ -3,7 +3,7 @@ import { UsersDbService } from "./users-db.service";
 import { SignUpDto } from "../auth/dto/sign-up.dto";
 import { SignInDto } from "../auth/dto/sign-in.dto";
 import { User } from "@models";
-import { changePhotoPathFor, getSkipAndTake } from "@utils";
+import { changePhotoPathFor, getSkipAndTake } from "../utils/scripts";
 import { NullableUser } from "./interfaces/nullable-user.interface";
 import { ExceptionManagerService } from "../exception-manager/exception-manager.service";
 import { FilesService } from "../files/files.service";

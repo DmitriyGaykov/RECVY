@@ -1,5 +1,5 @@
 import { BadRequestException, CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
-import { MessagesDbService } from "../../messages/messages-db.service";
+import { MessagesDbService } from "../../../messages/messages-db.service";
 
 @Injectable()
 export class IsSuitDataToDellOrEditMsgGuard implements CanActivate {

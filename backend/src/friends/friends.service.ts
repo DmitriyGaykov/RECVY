@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { FriendsDbService } from "./friends-db.service";
 import { User } from "@models";
-import { changePhotoPathFor } from "@utils";
+import { changePhotoPathFor } from "../utils/scripts";
 
 @Injectable()
 export class FriendsService {

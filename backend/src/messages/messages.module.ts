@@ -6,13 +6,16 @@ import { DbModule } from "../db/db.module";
 import { UsersModule } from "../users/users.module";
 import { AppJwtModule } from "../auth/jwt/jwt.module";
 import { ExceptionManagerService } from "../exception-manager/exception-manager.service";
+import { StickersService } from "../admin/stickers/stickers.service";
+import { StickersModule } from "../admin/stickers/stickers.module";
 
 @Module({
-  imports: [DbModule.register('app-user'), UsersModule, AppJwtModule],
+  imports: [DbModule.register('app-user'), UsersModule, AppJwtModule, StickersModule],
   providers: [
     MessagesService,
     MessagesDbService,
-    ExceptionManagerService
+    ExceptionManagerService,
+    StickersService
   ],
   controllers: [MessagesController]
 })
