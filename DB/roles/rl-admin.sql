@@ -16,3 +16,5 @@ grant insert on roles to RL_ADMIN;
 grant update on roles to RL_ADMIN;
 grant delete on users to RL_ADMIN;
 grant delete on usersroles to RL_ADMIN;
+grant select on blocked_users to RL_ADMIN;
+

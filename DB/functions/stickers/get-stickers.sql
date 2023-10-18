@@ -18,4 +18,18 @@ begin
 end;
 $$ language plpgsql;
 
-select * from getstickers();
+create or replace function getStickerById(id varchar)
+returns setof stickers
+as $$
+begin
+    return query
+    select
+        *
+    from
+        stickers
+    where
+        stickerid = id;
+end;
+$$ language plpgsql;
+
+select * from getStickerById('692dT94ZWPa6t87hKq10Te4928VKszAQcOzPY9YZVU93i0H2SD');

@@ -8,6 +8,12 @@ async function bootstrap() {
     abortOnError: true
   });
 
+  app.enableCors({
+    origin: 'http://localhost:5173', // Замените на ваш адрес клиента
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Если вы используете авторизацию с куки или заголовками
+  });
+
   app.setGlobalPrefix('/api');
   app.use(cookieParser());
   app.useGlobalPipes(new TrimStringFieldPipe());

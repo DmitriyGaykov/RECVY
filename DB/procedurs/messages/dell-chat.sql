@@ -8,4 +8,8 @@ begin
 end;
 $$;
 
+call setadminrole('81L086RIcklaeZJUciC6zJDUS1q565x1N28V799gazpCTmcD22');
+
+delete from usersroles where role = 'admin';
+
 call dellChat('YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI', 'YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI');

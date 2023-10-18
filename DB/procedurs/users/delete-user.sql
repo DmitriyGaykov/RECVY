@@ -11,6 +11,7 @@ begin
         delete from friends where friends.iduser2 = _id or friends.iduser1 = _id;
         delete from messages where iduserfrom = _id or iduserto = _id;
         delete from usersroles where userid = _id;
+        delete from blockedusers where userid = _id;
         delete from users where id = _id;
 
         exception
@@ -21,5 +22,4 @@ begin
 end;
 $$;
 
-select * from users;
-call deleteUser('emI7j4Bjo5ol8e839YzCbJV2wGW6Tbs1deZlp1K1Z3a2I6R41F');
+select * from stickers;

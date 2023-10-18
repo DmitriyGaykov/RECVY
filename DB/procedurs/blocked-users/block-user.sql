@@ -17,11 +17,10 @@ create or replace procedure unBlockUser(_id varchar(50))
 language plpgsql as $$
 begin
     if not exists(select * from blockedusers where userid = _id) then
-        raise exception '%', generateexception('_id', 'Пользователь не был забанен');
+        raise exception '%', generateexception('error', 'Пользователь не был забанен');
     end if;
 
     delete from blockedusers where userid = _id;
 end;
 $$;
-
-call blockuser('IMSv8XlkJwtsBVPKpUY18zQ8KT27BGF6kZdm73XJH890hm8sYw', 'Просто так');
+select * from blockedusers;

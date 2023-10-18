@@ -10,7 +10,7 @@ export const UploadFile = createParamDecorator((data : string, ctx : ExecutionCo
 
   if(!(file instanceof MemoryStoredFile)) {
     throw new BadRequestException({
-      'file': 'Поле файл не действительно'
+      'photo': 'Поле файл не действительно'
     });
   }
 

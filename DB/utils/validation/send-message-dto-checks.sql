@@ -81,7 +81,7 @@ begin
             from
                 stickers as s
             where
-                s.sticker = msg) into isExist;
+                s.stickerid = msg) into isExist;
 
         return isExist;
     end if;
