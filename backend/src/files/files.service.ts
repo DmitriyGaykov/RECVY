@@ -35,6 +35,6 @@ export class FilesService {
   }
 
   getNameForUserImg(name : string) : string {
-    return `/img/users/${name}`
+    return `/static/img/users/${name}`
   }
 }

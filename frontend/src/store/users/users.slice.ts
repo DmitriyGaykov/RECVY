@@ -1,24 +1,21 @@
-// slice
-
+import {User} from "../../models";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-export type UserStateType = {
-  token?: string;
+export type UsersStateType = {
+  current: User;
 }
 
-const initialState : UserStateType = {
-  token: null
-}
+const initialState : UsersStateType = {}
 
-export const usersSlice = createSlice({
+const usersSlice = createSlice({
   name: 'users-slice',
   initialState,
   reducers: {
-    setToken(state : UserStateType, action : PayloadAction<string>) {
-      state.token = action.payload;
+    setCurrentUser(state, action : PayloadAction<User>) : void {
+      state.current = action.payload;
     }
   }
 })
 
-export const { setToken } = usersSlice;
+export const { setCurrentUser } = usersSlice.actions;
 export const usersReducer = usersSlice.reducer;

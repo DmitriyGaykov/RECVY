@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ExceptionManagerModule } from './exception-manager/exception-manager.module';
@@ -12,6 +12,8 @@ import { MessagesModule } from './messages/messages.module';
 import { ConfigModule } from './config/config.module';
 import { AdminModule } from './admin/admin.module';
 import { StickersModule } from './stickers/stickers.module';
+import { ChatsModule } from './chats/chats.module';
+import { NotFoundMiddleware } from "@middlewares";
 
 @Module({
   imports: [
@@ -21,14 +23,20 @@ import { StickersModule } from './stickers/stickers.module';
     FilesModule,
     PhotosModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public')
+      rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/static'
     }),
     SubscribersModule,
     FriendsModule,
     MessagesModule,
     ConfigModule,
     AdminModule,
-    StickersModule
+    StickersModule,
+    ChatsModule
   ],
 })
-export class AppModule {}
+export class AppModule {
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer.apply(NotFoundMiddleware).forRoutes('/static/*');
+  // }
+}

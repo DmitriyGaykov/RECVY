@@ -1,12 +1,18 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {usersApi, usersReducer} from "./users";
+import {authApi, authReducer} from "./auth";
+import {usersReducer} from "./users";
+import {chatsApi, chatsReducer} from "./chats";
+import {photosApi} from "./photos";
 
 export const store = configureStore({
   reducer: {
-    users: [usersReducer],
-    [usersApi.reducerPath]: usersApi.reducer,
+    auth: authReducer,
+    users: usersReducer,
+    chats: chatsReducer,
+    [authApi.reducerPath]: authApi.reducer,
+    [photosApi.reducerPath]: photosApi.reducer,
+    [chatsApi.reducerPath]: chatsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      .concat(usersApi.middleware)
+    getDefaultMiddleware().concat(authApi.middleware)
 });
