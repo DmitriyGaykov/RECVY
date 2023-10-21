@@ -35,6 +35,8 @@ begin
     where
         m.iduserfrom = $1 or
         m.iduserto = $1
+    order by
+        lm.sentdate desc
     offset skip
     limit take;
 

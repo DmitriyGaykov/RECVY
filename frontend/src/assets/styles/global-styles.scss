@@ -6,6 +6,10 @@
   width: 80%;
 }
 
+.max-height-100vh {
+  max-height: 100vh;
+}
+
 .rotate-on-90 {
   transform: rotate(90deg);
 }
@@ -25,6 +29,11 @@
 .fs-14px {
   font-size: 14px;
 }
+
+.fs-10px {
+  font-size: 10px;
+}
+
 
 .above-usual-text-size {
   font-size: 18px;
@@ -53,6 +62,13 @@
 
 .width-160 {
   width: 160px;
+}
+
+.width-and-text-ender-140 {
+  width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .text-ender-160 {

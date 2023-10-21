@@ -16,7 +16,11 @@ export class UsersController {
   ) {}
 
   @Get()
-  async getUsers(@Query('page', TryParseIntPipe) page?: number, @Query('searchText') searchText?: string) : Promise<User[]> {
+  async getUsers(@Query('page', TryParseIntPipe) page?: number, @Query('searchText') searchText?: string, @Query('userid') userid?: string) : Promise<User[] | User> {
+    if(userid) {
+      return await this.usersService.getUserById(userid);
+    }
+
     return searchText ?
       await this.usersService.searchUsers(searchText, page) :
       await this.usersService.getUsers(page);

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { UsersDbService } from "./users-db.service";
 import { SignUpDto } from "../auth/dto/sign-up.dto";
 import { SignInDto } from "../auth/dto/sign-in.dto";
@@ -39,7 +39,7 @@ export class UsersService {
       const user = await this.usersDbService.getUserById(id);
       return changePhotoPathFor(user);
     } catch (e : unknown) {
-      throw new BadRequestException(e);
+      throw new NotFoundException(e);
     }
   }
 

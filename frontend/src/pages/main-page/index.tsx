@@ -9,6 +9,7 @@ export const MainPage = () => {
 
       <Routes>
         <Route path='/messages' element={<MessagePage />}/>
+        <Route path='*' element={<MessagePage />}/>
       </Routes>
     </div>
   )

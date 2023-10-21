@@ -1,9 +1,9 @@
-import {FC, memo, useCallback, useEffect, useState} from "react";
+import {FC, memo} from "react";
 import {TextBlock} from "../../components";
 import trash from "../../assets/images/trash.svg";
 import {ImageButton} from "../../components/buttons";
-import {useCurrentChat, useMessageDesc, usePhoto} from "../../utils";
-import {useAppSelector} from "../../store";
+import {getTime, isToday, useCurrentChat, useMessageDesc, usePhoto} from "../../utils";
+import {RemoveCallback, useRemoveChat} from "../../utils/hooks/use-remove-chat.ts";
 
 export type RedirectChatBlockProps = {
   iduserto: string;
@@ -13,35 +13,42 @@ export type RedirectChatBlockProps = {
   messagetype: string;
   sentdate: Date;
   onClick?: (iduserto?: string) => void;
+  onDell?: RemoveCallback;
 }
 
-export const RedirectChatBlock : FC<RedirectChatBlockProps> = memo((props) => {
+export const RedirectChatBlock: FC<RedirectChatBlockProps> = memo((props) => {
   const photo = usePhoto(props.photo);
   const lastMessage = useMessageDesc(props.lastmessage, props.messagetype);
   const isCurrent = useCurrentChat(props.iduserto);
-
-  const onDell = useCallback(async () => {
-
-  }, [])
+  const removeChat = useRemoveChat(props.iduserto, props.onDell);
 
   return (
-    <section className={`w-100 p-1 rounded-1 d-flex align-items-center gap-2 ${isCurrent ? 'pink-color' : 'light-purple' }`} onClick={() => typeof props.onClick === 'function' && props.onClick(props.iduserto)}>
+    <section
+      className={`w-100 p-1 rounded-1 d-flex align-items-center gap-2 ${isCurrent ? 'pink-color' : 'light-purple'}`}
+      onClick={() => props.onClick(props.iduserto)}>
       {
         photo &&
-        <img src={photo} className="width-height-60 rounded-5" />
+        <img src={photo} className="width-height-60 rounded-5"/>
       }
       <div className="name-msg-wrapper d-flex flex-column justify-content-center">
-        <TextBlock className="width-160 text-ender-160">{props.firstname}</TextBlock>
-        <TextBlock className="width-160 text-ender-160">{lastMessage}</TextBlock>
+        <TextBlock className="width-and-text-ender-140">{props.firstname}</TextBlock>
+        <TextBlock className="width-and-text-ender-140">{lastMessage}</TextBlock>
       </div>
       <div className="vertical-grid flex-1">
         {
           isCurrent &&
           <div className="top d-flex justify-content-end align-items-center">
-            <ImageButton src={trash} onClick={onDell} className="width-height-20" />
+            <ImageButton src={trash} onClick={removeChat} className="width-height-20"/>
           </div>
         }
-        <TextBlock className="center fs-14px d-flex justify-content-end align-items-center">{props.sentdate.getHours()}:{props.sentdate.getMinutes()}</TextBlock>
+        <TextBlock
+          className={"center d-flex align-items-center justify-content-end " + (isToday(props.sentdate) ? 'fs-14px' : 'fs-10px')}>
+          {
+            isToday(props.sentdate) ?
+              <>{getTime(props.sentdate)}</> :
+              <>Недавно</>
+          }
+        </TextBlock>
       </div>
     </section>
   );

@@ -22,4 +22,14 @@ export class ChatsDbService {
       this.exceptionManagerService.generateErrorFromDbTextError(err.message);
     }
   }
+
+  async deleteChat(iduser1: string, iduser2: string) : Promise<void> {
+    try {
+      await this.pgp.none('call dellChat(${iduser1}, ${iduser2})', {iduser1, iduser2});
+    } catch (e : unknown) {
+      console.log(e);
+      const err = e as IError;
+      this.exceptionManagerService.generateErrorFromDbTextError(err.message);
+    }
+  }
 }

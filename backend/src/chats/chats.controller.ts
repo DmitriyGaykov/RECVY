@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Delete, Get, Query } from "@nestjs/common";
 import { Chat, User } from '@models';
 import { AuthAs, InjectUser } from '@decorators';
 import { TryParseIntPipe } from '@pipes';
@@ -18,5 +18,10 @@ export class ChatsController {
     @Query('page', TryParseIntPipe) page?: number,
   ): Promise<Chat[]> {
     return await this.chatsService.getChats(id, page);
+  }
+
+  @Delete()
+  async deleteChat(@InjectUser() {id} : User, @Query('userid') userid: string): Promise<void> {
+    return await this.chatsService.deleteChat(id, userid);
   }
 }
