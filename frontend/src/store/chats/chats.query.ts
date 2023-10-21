@@ -1,7 +1,9 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {dateMapper} from "../../utils";
+import {ChatId} from "./chats.slice.ts";
 
 export const chatsApi = createApi({
+  reducerPath: 'chats-api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3001/api/chats',
     credentials: 'include'
@@ -16,8 +18,15 @@ export const chatsApi = createApi({
       transformResponse: response => {
         return response?.map(el => dateMapper(el, 'sentdate'));
       }
+    }),
+    removeChat: build.mutation({
+      query: (userid: ChatId) => ({
+        url: ``,
+        method: 'DELETE',
+        params: {userid}
+      })
     })
   })
 });
 
-export const {useGetChatsQuery} = chatsApi;
+export const {useGetChatsQuery, useRemoveChatMutation} = chatsApi;

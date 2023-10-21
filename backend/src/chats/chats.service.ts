@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { Chat } from "@models";
 import { getSkipAndTake } from "@utils";
 import { ChatsDbService } from "./chats-db.service";
@@ -22,6 +22,14 @@ export class ChatsService {
       })
     } catch (e : unknown) {
       throw new BadRequestException(e);
+    }
+  }
+
+  async deleteChat(iduser1: string, iduser2: string) : Promise<void> {
+    try {
+      await this.chatsDbService.deleteChat(iduser1, iduser2);
+    } catch (e : unknown) {
+      throw new NotFoundException(e);
     }
   }
 }

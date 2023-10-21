@@ -1,6 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {authApi, authReducer} from "./auth";
-import {usersReducer} from "./users";
+import {usersApi, usersReducer} from "./users";
 import {chatsApi, chatsReducer} from "./chats";
 import {photosApi} from "./photos";
 
@@ -10,9 +10,9 @@ export const store = configureStore({
     users: usersReducer,
     chats: chatsReducer,
     [authApi.reducerPath]: authApi.reducer,
+    [usersApi.reducerPath]: usersApi.reducer,
     [photosApi.reducerPath]: photosApi.reducer,
-    [chatsApi.reducerPath]: chatsApi.reducer,
+    [chatsApi.reducerPath]: chatsApi.reducer
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware, usersApi.middleware, photosApi.middleware, chatsApi.middleware)
 });
