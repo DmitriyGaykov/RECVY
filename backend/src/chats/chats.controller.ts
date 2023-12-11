@@ -16,7 +16,10 @@ export class ChatsController {
   async getChat(
     @InjectUser() {id}: User,
     @Query('page', TryParseIntPipe) page?: number,
-  ): Promise<Chat[]> {
+    @Query('userid') userid?: string
+  ): Promise<Chat[] | Chat> {
+    if(userid != null)
+      return await this.chatsService.getChat(id, userid);
     return await this.chatsService.getChats(id, page);
   }
 

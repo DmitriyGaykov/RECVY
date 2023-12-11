@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 import { TrimStringFieldPipe } from "@pipes";
-import { NotFoundMiddleware } from "@middlewares";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

@@ -16,8 +16,9 @@ import { Roles } from '../users/roles';
 import { SendMessageDto } from "./dto/send-message.dto";
 import { Message, User } from "@models";
 import { AppValidationPipe, TryParseIntPipe } from "@pipes";
-import { IsThisUserInterceptor } from "@interceptors";
+import {IsMainAdminInterceptor, IsThisUserInterceptor} from "@interceptors";
 import { IsSuitDataToDellOrEditMsgGuard } from "@guards";
+import {InjectMessage} from "@decorators";
 
 @Controller('messages')
 @AuthAs(Roles.user)
@@ -28,7 +29,7 @@ export class MessagesController {
 
   @Post()
   @UsePipes(AppValidationPipe)
-  @UseInterceptors(IsThisUserInterceptor)
+  @UseInterceptors(IsThisUserInterceptor, IsMainAdminInterceptor)
   async sendMessage(@Body() message : SendMessageDto) : Promise<Message> {
     return await this.messagesService.sendMessage(message);
   }
@@ -50,8 +51,8 @@ export class MessagesController {
   @UseGuards(IsSuitDataToDellOrEditMsgGuard)
   async deleteMessage(
     @InjectUser() { id } : User,
-    @Query('messageid') messageid?: string
+    @InjectMessage() message: Message
   ) : Promise<void> {
-    return await this.messagesService.deleteMessage(messageid);
+    return await this.messagesService.deleteMessage(message);
   }
 }

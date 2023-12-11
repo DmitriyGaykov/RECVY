@@ -1,15 +1,18 @@
 import {useEffect, useState} from "react";
-import {useAppSelector, useGetUserQuery} from "../../store";
+import {useAppSelector, useLazyGetUserQuery} from "../../store";
 
 export const useHeaderText = () : string => {
   const [centerText, setCenterText] = useState("");
   const current = useAppSelector(state => state.chats.current);
-
-  const { data, isError } = useGetUserQuery(current);
+  const [getUser, { data, isError}] = useLazyGetUserQuery();
 
   useEffect(() => {
-    !isError && data && setCenterText(data?.firstname);
-  }, [data]);
+    getUser(current);
+  }, [current]);
 
-  return centerText as const;
+  useEffect(() => {
+    setCenterText(!isError ? data?.firstname : "");
+  }, [data, isError]);
+
+  return centerText;
 }

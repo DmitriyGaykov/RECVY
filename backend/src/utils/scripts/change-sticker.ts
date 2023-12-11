@@ -3,7 +3,7 @@ import { Sticker } from "@models";
 export const changeSticker = (sticker : Sticker) : Sticker => {
   return {
     ...sticker,
-    sticker: '/img/stickers/' + sticker.sticker
+    sticker: '/static/img/stickers/' + sticker.sticker
   }
 }
 

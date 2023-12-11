@@ -10,9 +10,12 @@ export class StickersDbService {
     @Inject('app-user-connection') private readonly pgp : pg_promise.IDatabase<IDBDatabase>,
     private readonly exceptionManagerService : ExceptionManagerService
   ) {}
-  async getStickers() : Promise<Sticker[]> {
+  async getStickers(skip?: number, take?: number) : Promise<Sticker[]> {
     try {
-      return await this.pgp.any('select * from getstickers()')
+      skip ??= null;
+      take ??= null;
+
+      return await this.pgp.any('select * from getstickers(${skip}, ${take})', {skip, take});
     } catch (e : unknown) {
       const err = e as IError;
       throw this.exceptionManagerService.generateErrorFromDbTextError(err.message);

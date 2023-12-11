@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import {BadRequestException, HttpException, Injectable, NotFoundException} from "@nestjs/common";
 import { SubscribersDbService } from "./subscribers-db.service";
 import { User } from "@models";
 import { changePhotoPathFor, getSkipAndTake } from "../utils/scripts";
@@ -33,14 +33,24 @@ export class SubscribersService {
     }
   }
 
-  async getSubscribersOf(userid: string, page?: number) : Promise<User[]> {
+  async getSubscribersOf(userid: string, page?: number, searchText?: string) : Promise<User[]> {
     try {
       userid ??= null;
       const { skip, take } = getSkipAndTake(page, SubscribersService.CNT_USERS_PER_PAGE);
-      const users = await this.subscribersDbService.getSubscribersOf(userid, skip, take);
+      const users = await this.subscribersDbService.getSubscribersOf(userid, searchText, skip, take);
       return users.map(user => changePhotoPathFor(user));
     } catch (e : unknown) {
       throw new BadRequestException(e);
+    }
+  }
+
+  async isSubscribingExist(userid: string, whom: string) : Promise<void> {
+    try {
+      const isExist = await this.subscribersDbService.isSubscribingExist(userid, whom);
+      if(!isExist)
+        throw new NotFoundException();
+    } catch (e: unknown) {
+      throw e instanceof HttpException ? e : new BadRequestException(e);
     }
   }
 }

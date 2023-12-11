@@ -2,7 +2,7 @@ create or replace function checkNameAndLastname(text varchar(20))
 returns boolean
 as $$
 begin
-    if length(text) < 2 or length(text) > 20 then
+    if text is null or length(text) < 2 or length(text) > 20 then
         return false;
     end if;
 
@@ -14,7 +14,7 @@ create or replace function checkAge(age integer)
 returns boolean
 as $$
 begin
-    return age > 6 and age < 150;
+    return age is not null and age > 6 and age < 150;
 end;
 $$ language plpgsql;
 
@@ -23,7 +23,7 @@ create or replace function checkPassword(password varchar(256))
 returns boolean
 as $$
 begin
-    return password ~ '^[A-Za-zА-Яа-я0-9_]{8,64}$';
+    return password is not null and password ~ '^[A-Za-zА-Яа-я0-9_]{8,64}$';
 end;
 $$ language plpgsql;
 
@@ -58,7 +58,7 @@ declare
 begin
     length := length(_login);
 
-    if not _login ~ '[A-Za-zА-Яа-я0-9]{6,20}' then
+    if _login is null or not _login ~ '[A-Za-zА-Яа-я0-9]{6,20}' then
         return -1;
     end if;
 
@@ -94,3 +94,5 @@ begin
     return _reason;
 end;
 $$ language plpgsql;
+
+select checkUserWasBanned('hrbg7uG6FUNpl47bJO499c690OVV53Cif9Pv5J537v0gR2j2E');

@@ -1,0 +1,15 @@
+.adminNote {
+  position: relative;
+  &:hover::after {
+    content: 'Эта метка означает, что пользователь является администратором приложения RECVY';
+    position: absolute;
+    display: block;
+    padding: 4px;
+    border-radius: 2px;
+    background-color: #ffffff22;
+    text-shadow: none;
+    color: #ffffff;
+    width: 120px;
+    text-align: justify;
+  }
+}

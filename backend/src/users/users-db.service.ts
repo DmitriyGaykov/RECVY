@@ -62,7 +62,7 @@ export class UsersDbService {
   async editUserInfo({id, firstname, lastname, age, aboutme, password } : NullableUser) : Promise<User> {
     try {
       const params : NullableUser = {
-        id: id,
+        id: id || null,
         firstname: firstname || null,
         lastname: lastname || null,
         age: age || null,

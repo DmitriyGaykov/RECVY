@@ -18,4 +18,6 @@ begin
 end;
 $$ language plpgsql;
 
-select * from getUsers(0, 10)
+select * from getUsers(0, 10);
+
+insert into usersroles(userid, role) values ('81L086RIcklaeZJUciC6zJDUS1q565x1N28V799gazpCTmcD22', 'admin');

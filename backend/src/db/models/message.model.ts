@@ -5,6 +5,7 @@ export enum MessageType {
 }
 
 export class Message {
+  messageid: string;
   iduserfrom: string;
   iduserto: string;
   message: string;

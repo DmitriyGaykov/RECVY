@@ -2,6 +2,9 @@ create role RL_ADMIN;
 
 grant RL_USER to RL_ADMIN;
 
+grant execute on function messagetojson to RL_ADMIN;
+grant execute on procedure usersfromjson to RL_ADMIN;
+
 grant delete on stickers to RL_ADMIN;
 grant insert on stickers to RL_ADMIN;
 grant update on stickers to RL_ADMIN;

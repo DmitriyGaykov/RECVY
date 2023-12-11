@@ -6,3 +6,4 @@ create tablespace IndexTablespace
 
 create tablespace SystemTablespace
     location 'D:\DB\PSQL\data\RECVY\SystemTB';
+

@@ -1,16 +1,19 @@
-import { BadRequestException, HttpException, Injectable, InternalServerErrorException } from "@nestjs/common";
-import { MessagesDbService } from "./messages-db.service";
-import { Message, MessageType, Sticker } from "@models";
-import { SendMessageDto } from "./dto/send-message.dto";
-import { getSkipAndTake } from "../utils/scripts";
-import { StickersService } from "../admin/stickers/stickers.service";
+import {BadRequestException, HttpException, Injectable, InternalServerErrorException} from "@nestjs/common";
+import {MessagesDbService} from "./messages-db.service";
+import {Message, MessageType, Sticker} from "@models";
+import {SendMessageDto} from "./dto/send-message.dto";
+import {getSkipAndTake} from "@utils";
+import {StickersService} from "../admin/stickers/stickers.service";
+import {FilesService} from "../files/files.service";
+import {AudiosService} from "./audios/audios.service";
 
 @Injectable()
 export class MessagesService {
   private static readonly MAX_MESSAGES_COUNT_FOR_TIME = 15;
   constructor(
     private readonly messagesDbService: MessagesDbService,
-    private readonly stickersService: StickersService
+    private readonly stickersService: StickersService,
+    private readonly audiosService: AudiosService
   ) {}
 
   async sendMessage(message: SendMessageDto): Promise<Message> {
@@ -76,15 +79,18 @@ export class MessagesService {
 
   async editMessage(idmessage: string, message: string): Promise<void> {
     try {
+      if(message === "") throw null;
       return await this.messagesDbService.editMessage(idmessage, message);
     } catch (e: unknown) {
       throw new BadRequestException(e);
     }
   }
 
-  async deleteMessage(idmessage: string): Promise<void> {
+  async deleteMessage(message: Message): Promise<void> {
     try {
-      return await this.messagesDbService.deleteMessage(idmessage);
+      await this.messagesDbService.deleteMessage(message.messageid);
+      if(message.messagetype !== MessageType.VOICE) return;
+      return await this.audiosService.deleteVoice(message.messageid)
     } catch (e: unknown) {
       throw new BadRequestException(e);
     }

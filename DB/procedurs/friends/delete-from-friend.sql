@@ -15,11 +15,11 @@ begin
     exception
         when others then
             rollback;
-            raise notice 'Error: %', SQLERRM;
+            raise exception '%', SQLERRM;
 end;
 $$;
 
 select * from users where login = '123321';
 
-call deleteFromFriends('YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI', '81L086RIcklaeZJUciC6zJDUS1q565x1N28V799gazpCTmcD22');
+call deleteFromFriends('YLZXq6IP91I7A16QcwH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI', '81L086RIcklaeZJUciC6zJDUS1q565x1N28V799gazpCTmcD22');
 select hissubscriberof('81L086RIcklaeZJUciC6zJDUS1q565x1N28V799gazpCTmcD22', 'YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI');

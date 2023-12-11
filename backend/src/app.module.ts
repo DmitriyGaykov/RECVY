@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ExceptionManagerModule } from './exception-manager/exception-manager.module';
@@ -13,7 +13,7 @@ import { ConfigModule } from './config/config.module';
 import { AdminModule } from './admin/admin.module';
 import { StickersModule } from './stickers/stickers.module';
 import { ChatsModule } from './chats/chats.module';
-import { NotFoundMiddleware } from "@middlewares";
+import {WsServerModule} from "./ws-server/ws-server.module";
 
 @Module({
   imports: [
@@ -32,7 +32,8 @@ import { NotFoundMiddleware } from "@middlewares";
     ConfigModule,
     AdminModule,
     StickersModule,
-    ChatsModule
+    ChatsModule,
+    WsServerModule
   ],
 })
 export class AppModule {

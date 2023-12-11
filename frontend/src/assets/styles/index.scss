@@ -5,6 +5,12 @@
   transition: all .2s ease-in-out;
 }
 
+body {
+  max-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+}
+
 a, button {
   cursor: pointer;
 }
@@ -13,6 +19,9 @@ a {
   text-decoration: none;
 }
 
+img {
+  object-fit: cover;
+}
 ul {
   list-style-type: none;
 }

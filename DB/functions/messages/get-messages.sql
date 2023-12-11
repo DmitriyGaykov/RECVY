@@ -18,4 +18,7 @@ begin
 end;
 $$ language plpgsql;
 
-select * from messages;
+select iduserfrom, iduserto, message from messages order by sentdate desc limit 10 offset 0;
+
+select * from messages where iduserfrom = 'MfhE4T8XrV5urZXlXp9gM7f4940emJb8NbnE43UjFz5ZPUdQ6y' or iduserto = 'MfhE4T8XrV5urZXlXp9gM7f4940emJb8NbnE43UjFz5ZPUdQ6y';
+select * from getMessages('MfhE4T8XrV5urZXlXp9gM7f4940emJb8NbnE43UjFz5ZPUdQ6y', 'qQhI80pjjWM6M1bxAa3LJs5aI1f6JJjIro39lzjEsAdEutyxlK');

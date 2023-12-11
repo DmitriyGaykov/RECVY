@@ -1,3 +1,5 @@
+@import "colors";
+
 .page-left-side {
   width: 20%;
 }
@@ -8,6 +10,10 @@
 
 .max-height-100vh {
   max-height: 100vh;
+}
+
+.scale0_8 {
+  transform: scale(.5);
 }
 
 .rotate-on-90 {
@@ -34,6 +40,10 @@
   font-size: 10px;
 }
 
+.fs-7px {
+  font-size: 7px;
+}
+
 
 .above-usual-text-size {
   font-size: 18px;
@@ -48,13 +58,28 @@
 }
 
 .flex-1 {
-  flex: 1;
+  flex: 1 0;
+}
+
+.width-height-10 {
+  width: 10px;
+  height: 10px;
 }
 
 .width-height-30 {
   width: 30px;
   height: 30px;
 }
+.width-height-100 {
+  width: 100px;
+  height: 100px;
+}
+
+.width-height-180 {
+  width: 180px;
+  height: 180px;
+}
+
 
 .max-width-150 {
   max-width: 150px;
@@ -65,7 +90,14 @@
 }
 
 .width-and-text-ender-140 {
-  width: 140px;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.width-and-text-ender-110 {
+  max-width: 110px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -78,6 +110,26 @@
   text-overflow: ellipsis;
 }
 
+.width-height-15 {
+  width: 15px;
+  height: 15px;
+}
+
+.width-height-80 {
+  width: 80px;
+  height: 80px;
+}
+
+.width-height-85 {
+  width: 85px;
+  height: 85px;
+}
+
+.width-height-90 {
+  width: 90px;
+  height: 90px;
+}
+
 .width-height-60 {
   width: 60px;
   height: 60px;
@@ -87,6 +139,33 @@
   width: 20px;
   height: 20px;
 }
+
+.width-height-120 {
+  width: 120px;
+  height: 120px;
+}
+
+.width-height-10 {
+  width: 10px;
+  height: 10px;
+}
+
+.width-height-12 {
+  width: 12px;
+  height: 12px;
+}
+
+.border-radius-1500 {
+  border-radius: 1500px;
+}
+
+.max-width-200 {
+  max-width: 200px;
+}
+.max-width-250 {
+  max-width: 250px;
+}
+
 
 .vertical-grid {
   display: grid;
@@ -110,3 +189,86 @@
   }
 }
 
+.scroll-container {
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px; // Ширина скролла
+    border-radius: 2px; // Закругленные углы скролла
+    background-color: #ffffff60; // Цвет фона скролла
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ffffff60; // Цвет скролла
+    margin: 10px;
+    padding: 2px;
+    border-radius: 2px; // Закругленные углы скролла
+  }
+}
+
+.flex-0 {
+  flex: 0 0;
+}
+
+.grid-container-3-columns {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-auto-rows: 85px;
+  gap: 3.33%;
+}
+
+.green-color-transform-gradient {
+  transition: all 30s ease-in-out;
+  animation: GreenGradient 30s infinite;
+}
+
+@keyframes GreenGradient {
+  0% {
+    background: #aaee00;
+  }
+  10% {
+    background: #00aa00;
+  }
+  20% {
+    background: #00ee00;
+  }
+  50% {
+    background: #00ff00;
+  }
+  70% {
+    background: #00ee00;
+  }
+  80% {
+    background: #00aa00;
+  }
+  100% {
+    background: yellow;
+  }
+}
+
+.white-text-with-red-glow {
+  text-shadow: 0 0 2px #ff0000;
+  color: #ffffff;
+}
+
+.stress-admin-name {
+  text-shadow: 0 0 5px $pink-color;
+  position: relative;
+  &:hover::after {
+    content: 'Администратор приложения RECVY';
+    position: absolute;
+    display: block;
+    padding: 4px;
+    font-size: 10px;
+    top:120%;
+    border-radius: 2px;
+    background-color: #ffffff22;
+    text-shadow: none;
+    color: #ffffff;
+    text-align: justify;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

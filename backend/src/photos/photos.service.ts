@@ -13,19 +13,22 @@ export class PhotosService {
     private readonly photosDbService : PhotosDbService,
     private readonly exceptionManagerService : ExceptionManagerService
   ) {}
-  async addPhoto(userId: string, photo: MemoryStoredFile, photoName?: string) : Promise<void> {
+  async addPhoto(userId: string, photo: MemoryStoredFile, photoName?: string) : Promise<string> {
     try {
       const newFileName = photoName || await generateString(250, true);
       this.filesService.rename(photo, newFileName);
 
       await this.photosDbService.addPhotoToUser(userId, photo.originalName);
       await this.filesService.saveUserFile(photo);
+
+      return this.filesService.getNameForUserImg(photo.originalName);
     } catch (e : unknown) {
       throw new BadRequestException(e);
     }
   }
   async deletePhoto(user : User, photo: string) : Promise<void> {
     try {
+      console.log(photo)
       if(!user.photos.includes(this.filesService.getNameForUserImg(photo)))
         throw this.exceptionManagerService.generateFieldError('error', 'У вас нет такого фото!');
 

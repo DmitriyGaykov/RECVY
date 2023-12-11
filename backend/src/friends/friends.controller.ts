@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Query } from "@nestjs/common";
+import {Controller, Delete, Get, Head, Post, Query} from "@nestjs/common";
 import { AuthAs, InjectUser } from "@decorators";
 import { Roles } from '../users/roles';
 import { User } from "@models";
@@ -11,9 +11,14 @@ export class FriendsController {
   constructor(
     private readonly friendsService: FriendsService
   ) {}
+
+  @Head()
+  async thisFriendExists(@Query('userid') userid : string, @Query('whom') whom : string) : Promise<void> {
+    await this.friendsService.thisFriendExists(userid, whom);
+  }
   @Get()
-  async getFriends(@Query('userid') userid : string, @Query('page', TryParseIntPipe) page: number) : Promise<User[]> {
-    return await this.friendsService.getFriendsOf(userid);
+  async getFriends(@Query('userid') userid: string, @Query('page', TryParseIntPipe) page: number, @Query('searchText') searchText?: string) : Promise<User[]> {
+    return await this.friendsService.getFriendsOf(userid, page, searchText);
   }
 
   @Post()

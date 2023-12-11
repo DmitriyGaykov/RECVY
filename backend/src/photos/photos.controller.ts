@@ -13,7 +13,7 @@ export class PhotosController {
   ) {}
   @Post()
   @FormDataRequest()
-  async addPhoto(@InjectUser() user : User, @UploadFile('photo') photo : MemoryStoredFile) : Promise<void> {
+  async addPhoto(@InjectUser() user : User, @UploadFile('photo') photo : MemoryStoredFile) : Promise<string> {
     return await this.photosService.addPhoto(user?.id, photo);
   }
 

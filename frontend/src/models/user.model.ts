@@ -1,9 +1,11 @@
 export interface User {
   id?: string;
+  login?: string;
   firstname?: string;
   lastname?: string;
   password?: string;
+  aboutme?: string;
   age?: number;
-  photo?: string[];
-  roles?: string[];
+  photos?: string[];
+  role?: string[];
 }

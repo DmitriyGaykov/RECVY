@@ -4,5 +4,3 @@ begin
     return query select * from messages where messageid = $1;
 end;
 $$ language plpgsql;
-
-select * from getMessageById('')

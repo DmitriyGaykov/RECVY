@@ -16,12 +16,24 @@ export class ChatsService {
     try {
       const {skip, take} = getSkipAndTake(page, ChatsService.CNW_CHATS);
       const chats = await this.chatsDbService.getChats(userid, skip, take);
+
       return chats.map(el => {
         el.photo = this.filesService.getNameForUserImg(el.photo);
         return el;
       })
     } catch (e : unknown) {
       throw new BadRequestException(e);
+    }
+  }
+
+
+  async getChat(iduser1: string, iduser2: string) : Promise<Chat> {
+    try {
+      const chat = await this.chatsDbService.getChat(iduser1, iduser2);
+      if(!chat) throw undefined;
+      return chat;
+    } catch (e: unknown) {
+      throw new NotFoundException(e);
     }
   }
 

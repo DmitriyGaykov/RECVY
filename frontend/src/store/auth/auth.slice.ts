@@ -10,15 +10,20 @@ const initialState : AuthStateType = {
   token: null
 }
 
+export const DELETE_TOKEN_FROM_COOKIE: string = 'DELETE_TOKEN_FROM_COOKIE';
+
 export const authSlice = createSlice({
   name: 'auth-slice',
   initialState,
   reducers: {
     setToken(state : AuthStateType, action : PayloadAction<string>) {
       state.token = action.payload;
+    },
+    clearToken(state : AuthStateType) {
+      state.token = DELETE_TOKEN_FROM_COOKIE;
     }
   }
 })
 
-export const { setToken } = authSlice.actions;
+export const { setToken, clearToken } = authSlice.actions;
 export const authReducer = authSlice.reducer;

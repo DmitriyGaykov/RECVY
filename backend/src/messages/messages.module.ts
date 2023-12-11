@@ -8,15 +8,19 @@ import { AppJwtModule } from "../auth/jwt/jwt.module";
 import { ExceptionManagerService } from "../exception-manager/exception-manager.service";
 import { StickersService } from "../admin/stickers/stickers.service";
 import { StickersModule } from "../admin/stickers/stickers.module";
+import { AudiosModule } from './audios/audios.module';
+import {AudiosService} from "./audios/audios.service";
 
 @Module({
-  imports: [DbModule.register('app-user'), UsersModule, AppJwtModule, StickersModule],
+  imports: [DbModule.register('app-user'), UsersModule, AppJwtModule, StickersModule, AudiosModule],
   providers: [
     MessagesService,
     MessagesDbService,
     ExceptionManagerService,
-    StickersService
+    StickersService,
+    AudiosService
   ],
-  controllers: [MessagesController]
+  controllers: [MessagesController],
+  exports: [MessagesDbService]
 })
 export class MessagesModule {}

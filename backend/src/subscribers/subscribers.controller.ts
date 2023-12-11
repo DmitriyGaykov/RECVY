@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Inject, Post, Query, UseInterceptors } from "@nestjs/common";
+import {Controller, Delete, Get, Head, Inject, Post, Query, UseInterceptors} from "@nestjs/common";
 import { SubscribersService } from "./subscribers.service";
 import { User } from "@models";
 import { TryParseIntPipe } from "@pipes";
@@ -12,9 +12,14 @@ export class SubscribersController {
     private readonly subscribersService : SubscribersService
   ) {}
 
+  @Head()
+  async isSubscribingExist(@Query('userid') userid: string, @Query('whom') whom: string) : Promise<void> {
+    return await this.subscribersService.isSubscribingExist(userid, whom);
+  }
+
   @Get()
-  async getSubscribersOf(@Query('userid') userid : string, @Query('page', TryParseIntPipe) page : number) : Promise<User[]> {
-    return await this.subscribersService.getSubscribersOf(userid, page);
+  async getSubscribersOf(@Query('userid') userid : string, @Query('page', TryParseIntPipe) page?: number, @Query('searchText') searchText?: string) : Promise<User[]> {
+    return await this.subscribersService.getSubscribersOf(userid, page, searchText);
   }
 
   @Post()

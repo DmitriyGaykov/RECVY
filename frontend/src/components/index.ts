@@ -1,4 +1,7 @@
 export * from './textblocks/text-block'
 export * from './inputs/image-input'
+export * from './inputs/send-input'
 export * from './textblocks/error-message'
 export * from './links'
+export * from './buttons'
+export * from './textblocks/admin-note'

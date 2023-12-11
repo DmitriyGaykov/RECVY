@@ -1,7 +1,26 @@
-$bg-color: #2E0D40;
-$light-purple: #704094;
-$header-color: #3E1056;
-$pink-color: #D313A9;
+ $bg-color: #2E0D40;
+ $light-purple: #704094;
+ $header-color: #3E1056;
+ $pink-color: #D313A9;
+ $pink-color-hover: #b10186;
+ $light-purple-hover: #652589;
+
+//$bg-color: #131313;
+//$light-purple: #353535;
+//$header-color: #111111;
+//$pink-color: #575757;
+//$pink-color-hover: #363636;
+//$light-purple-hover: #282828;
+
+button.pink-color:hover {
+  transition: all .4s ease-in-out;
+  background-color: $pink-color-hover;
+}
+
+button.light-purple:hover {
+  transition: all .4s ease-in-out;
+  background-color: $light-purple-hover;
+}
 
 .bg-color {
   background-color: $bg-color;

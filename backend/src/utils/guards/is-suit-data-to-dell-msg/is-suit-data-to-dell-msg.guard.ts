@@ -23,6 +23,8 @@ export class IsSuitDataToDellOrEditMsgGuard implements CanActivate {
         if(!msg || msg.iduserfrom !== request.user.id) {
           throw new BadRequestException();
         }
+
+        request.msg = msg;
       }
 
       return true;

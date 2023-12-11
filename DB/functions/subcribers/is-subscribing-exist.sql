@@ -17,4 +17,8 @@ begin
 end;
 $$ language plpgsql;
 
+select * from messages order by sentdate desc limit 1;
+
+call subscribe('81L086RIcklaeZJUciC6zJDUS1q565x1N28V799gazpCTmcD22','MfhE4T8XrV5urZXlXp9gM7f4940emJb8NbnE43UjFz5ZPUdQ6y');
+
 select isSubscribingExist('81L086RIcklaeZJUciC6zJDUS1q565x1N28V799gazpCTmcD22', 'YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI');

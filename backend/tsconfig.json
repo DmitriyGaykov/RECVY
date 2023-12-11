@@ -28,6 +28,7 @@
       "@guards": ["src/utils/guards"],
       "@interceptors": ["src/utils/interceptors"],
       "@middlewares": ["src/utils/middlewares"],
+      "@filters": ["src/utils/filters"]
     }
   }
 }

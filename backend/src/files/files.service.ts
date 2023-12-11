@@ -7,8 +7,8 @@ import * as path from "path";
   scope: Scope.REQUEST
 })
 export class FilesService {
-  static readonly usersPath : string = path.resolve(__dirname, '../../public/img/users');
   static readonly stickersPath : string = path.resolve(__dirname, '../../public/img/stickers');
+  static readonly usersPath : string = path.resolve(__dirname, '../../public/img/users');
 
   async saveUserFile(file : MemoryStoredFile) : Promise<void> {
     return fs.promises.writeFile(path.resolve(FilesService.usersPath, file.originalName), file.buffer);
@@ -34,7 +34,28 @@ export class FilesService {
     return fs.promises.unlink(path.resolve(FilesService.stickersPath, name));
   }
 
-  getNameForUserImg(name : string) : string {
-    return `/static/img/users/${name}`
+    getNameForUserImg(name : string) : string {
+      return `/static/img/users/${name}`
+    }
+
+  async saveFile(path: string, buffer: Buffer) : Promise<void> {
+    return fs.promises.writeFile(path, buffer);
+  }
+
+  async isFileExist(path: string) : Promise<boolean> {
+    try {
+      await fs.promises.access(path);
+      return true;
+    } catch (e: unknown) {
+      return false;
+    }
+  }
+
+  async deleteFile(path: string) : Promise<void> {
+    return fs.promises.unlink(path);
+  }
+
+  async getFile(path: string) : Promise<Buffer> {
+    return fs.promises.readFile(path);
   }
 }

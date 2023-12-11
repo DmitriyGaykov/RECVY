@@ -15,3 +15,5 @@ $$ language plpgsql;
 
 
 select isFriendsExist('231', '12312');
+
+select * from friends;

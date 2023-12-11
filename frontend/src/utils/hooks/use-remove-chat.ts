@@ -1,7 +1,7 @@
 import {useRemoveChatMutation} from "../../store";
 import {useCallback} from "react";
 
-export type RemoveCallback = () => void;
+export type RemoveCallback = (...args?: any) => void;
 
 export const useRemoveChat = (chatId, cb?: RemoveCallback) => {
   const [removeChat, { isError }] = useRemoveChatMutation();

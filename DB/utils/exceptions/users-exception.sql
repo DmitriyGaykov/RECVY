@@ -37,7 +37,7 @@ as $$
 begin
     return generateexception(
         'error',
-        'Данный пользователь заблокирован. Причина: ' || reason
+        ('Данный пользователь заблокирован. Причина >> ' || reason)
         );
 end;
 $$ language plpgsql;

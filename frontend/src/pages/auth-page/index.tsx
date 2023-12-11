@@ -1,6 +1,5 @@
 import {Route, Routes} from "react-router";
-import {RegForm} from "../../entities/reg-form/reg-form.tsx";
-import {LoginForm} from "../../entities/login-form";
+import {LoginForm, RegForm} from "../../entities";
 
 export const AuthPage = () => {
   return (

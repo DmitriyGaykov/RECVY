@@ -2,7 +2,8 @@ import {
   ArgumentMetadata,
   BadRequestException,
   Injectable,
-  ValidationPipe, ValidationPipeOptions
+  ValidationPipe,
+  ValidationPipeOptions
 } from "@nestjs/common";
 import { ExceptionManagerService } from "../../../exception-manager/exception-manager.service";
 

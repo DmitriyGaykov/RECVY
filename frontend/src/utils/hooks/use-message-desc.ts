@@ -1,5 +1,6 @@
 import {MessageType} from "../../models";
 import {useEffect, useState} from "react";
+import {decrypt} from "../cryptor";
 
 export const useMessageDesc = (message: string, messagetype: MessageType) : string => {
   const [lastMessage, setLastMessage] = useState("");
@@ -10,13 +11,13 @@ export const useMessageDesc = (message: string, messagetype: MessageType) : stri
         setLastMessage(message);
         break;
       case MessageType.sticker:
-        setLastMessage('Sticker ☻');
+        setLastMessage('Стикер 😁');
         break;
       case MessageType.voice:
-        setLastMessage('Voice message...');
+        setLastMessage('Голосовое 🎤');
         break;
     }
-  }, []);
+  }, [message, messagetype]);
 
   return lastMessage as const;
 }

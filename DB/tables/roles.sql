@@ -4,3 +4,4 @@ create table Roles (
 
 insert into Roles values ('user');
 insert into Roles values ('admin');
+insert into Roles values ('mainadmin');

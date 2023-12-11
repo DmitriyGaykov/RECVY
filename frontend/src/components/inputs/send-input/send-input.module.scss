@@ -1,0 +1,8 @@
+.sendInput {
+  background-color: RGBA(0,0,0,0);
+  border: none;
+  outline: none;
+  &::placeholder {
+    color: #ffffff70;
+  }
+}

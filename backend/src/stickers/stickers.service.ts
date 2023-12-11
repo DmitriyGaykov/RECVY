@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, InternalServerErrorException } from "@nestjs/common";
 import { StickersDbService } from "./stickers-db.service";
 import { Sticker } from "@models";
-import { changeSticker } from "../utils/scripts";
+import {changeSticker, getSkipAndTake} from "../utils/scripts";
 
 @Injectable()
 export class StickersService {
@@ -9,9 +9,10 @@ export class StickersService {
     private readonly stickersDbService : StickersDbService
   ) {}
 
-  async getStickers() : Promise<Sticker[]> {
+  async getStickers(page: number) : Promise<Sticker[]> {
     try {
-      const stickers = await this.stickersDbService.getStickers();
+      const { skip, take } = getSkipAndTake(page, 15);
+      const stickers = await this.stickersDbService.getStickers(skip, take);
       return stickers.map(el => changeSticker(el));
     } catch (e : unknown) {
       throw new InternalServerErrorException(e);

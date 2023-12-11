@@ -22,7 +22,7 @@ begin
 
     if $3 is not null then
         if not checknameandlastname($3) then
-            raise exception '%', generatenameerror();
+            raise exception '%', generatelastnameerror();
         end if;
 
         update
@@ -75,5 +75,7 @@ begin
 end;
 $$;
 
-call editUserInfo('YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI', _firstname := 'Dimona');
+call editUserInfo('YLZXq6IP91I7A16Qc4wH5dweWJrwht4ZJFS7SsC7B4Pf8zP7fI', _lastname := '4gtgf');
 select * from getusers();
+
+select * from getstickers();

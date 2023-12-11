@@ -2,7 +2,7 @@ export const getSkipAndTake = (page: number, cnt: number) : {skip: number, take:
   let skip;
   let take;
 
-  if(page) {
+  if(page != null) {
     cnt ??= 10;
     skip = page * cnt
     take = cnt;
