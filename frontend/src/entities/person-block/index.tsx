@@ -3,7 +3,7 @@ import {User} from "../../models";
 import {PhotoSlider} from "../photo-slider";
 import {setToChat, useAppDispatch, useCurrentStoreUser, useOnlineChecker} from "../../store";
 import {BlockButton, NavButton, RadialButton, RelationButton, TextBlock} from "../../components";
-import {isAdmin, useGetMenu, useUserDeleter} from "../../utils";
+import {isAdmin, useGetMenu, useIsUserOnline, useUserDeleter} from "../../utils";
 import {DescriptionModal} from "../description-modal";
 
 export const PersonBlock: FC<User> = memo((user) => {
@@ -12,6 +12,8 @@ export const PersonBlock: FC<User> = memo((user) => {
   const {id} = useCurrentStoreUser();
   const dispatch = useAppDispatch();
   const deleteUser = useUserDeleter();
+
+  const isOnline = useIsUserOnline(user.id);
 
   const [reason, setReason] = useState(null);
 
@@ -25,6 +27,7 @@ export const PersonBlock: FC<User> = memo((user) => {
                    onClick={clickToOpen}>{user?.firstname}</TextBlock>
         <TextBlock className="text-white width-and-text-ender-140" style={{cursor: 'pointer'}}
                    onClick={clickToOpen}>{user?.lastname}</TextBlock>
+        {isOnline && <div className="width-height-10 green-color-transform-gradient rounded-3"></div>}
       </div>
       <div className={`d-flex gap-2 align-items-center ${admin && 'flex-column'}`}>
         {

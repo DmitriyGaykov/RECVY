@@ -3,7 +3,7 @@ import {User} from "../../models";
 import {PhotoSlider} from "../photo-slider";
 import {setToChat, useAppDispatch, useCurrentStoreUser, useOnlineChecker} from "../../store";
 import {BlockButton, NavButton, RadialButton, RelationButton, TextBlock} from "../../components";
-import {isAdmin, useGetMenu, useUserDeleter} from "../../utils";
+import {isAdmin, useGetMenu, useIsUserOnline, useUserDeleter} from "../../utils";
 import {DescriptionModal} from "../description-modal";
 
 export const BlockedPersonBlock: FC<User> = memo((user) => {

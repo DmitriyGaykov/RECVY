@@ -4,9 +4,9 @@ import {createSocket} from "./ws.slice.ts";
 import {Message, MessageType} from "../../models";
 import {addMessage, editMessage, EditMessageParams, removeMessage, useStoreMessages} from "../messages";
 import {setOnlineOfflineUserChat, useGetChatQuery, useStoreChats, useStoreCurrentChat} from "../chats";
-import {Callback, useChats, useCurrentChat, useNotification, useUpdateChat} from "../../utils";
+import {Callback, useCurrentChat, useNotification, useUpdateChat} from "../../utils";
 import {Socket} from "socket.io-client";
-import {setCurrentUser, useCurrentStoreUser} from "../users";
+import {addOnlineUser, removeUserFromOnline, useCurrentStoreUser} from "../users";
 import {clearToken} from "../auth";
 
 export const useSocket = () => {
@@ -139,6 +139,7 @@ export const useOnlineChecker = () => {
   const socket = useSocket();
   const dispatch = useAppDispatch();
   const chats = useStoreChats();
+  const getOnlineUsers = useGetOnlineUsers();
 
   useEffect(() => {
     if(socket == null || !chats) return;
@@ -146,15 +147,25 @@ export const useOnlineChecker = () => {
     socket.removeListener('user-offline');
 
     socket.addEventListener('user-online', (userid: string) => {
-      dispatch(setOnlineOfflineUserChat({userid, isOnline: true}));
+      const args = {userid, isOnline: true};
+      dispatch(setOnlineOfflineUserChat(args));
+      dispatch(addOnlineUser(userid));
     });
     socket.addEventListener('user-offline', (userid: string) => {
-      dispatch(setOnlineOfflineUserChat({ userid, isOnline: false }));
+      const args = {userid, isOnline: false};
+      dispatch(setOnlineOfflineUserChat(args));
+      dispatch(removeUserFromOnline(userid));
     })
 
-    socket.emit('get-online-users');
+    getOnlineUsers();
   }, [chats]);
 }
+
+export const useGetOnlineUsers = () => {
+  const socket = useSocket();
+  return () => socket.emit('get-online-users');
+}
+
 export const useUserDeleteHandler = () => {
   const socket = useSocket();
   const dispatch = useAppDispatch();

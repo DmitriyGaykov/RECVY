@@ -1,7 +1,14 @@
 import {ChangeEventHandler, useEffect, useState} from "react";
 import {User} from "../../models";
 import {useFriendsOf} from "./use-friends.ts";
-import {clearPeople, setPeople, useAppDispatch, useCurrentStoreUser, useStoredPeople} from "../../store";
+import {
+  clearPeople,
+  setPeople,
+  useAppDispatch,
+  useCurrentStoreUser,
+  useGetOnlineUsers,
+  useStoredPeople
+} from "../../store";
 import {useReset} from "./use-reset.ts";
 import {useSubscribersOf} from "./use-subscribers.ts";
 import {useSearchUsers} from "./use-search-users.ts";
@@ -52,9 +59,9 @@ export const usePeopleFind = () => {
   }, [isFriendsChecked, isSubsChecked, isAllChecked, isAllData, isAllFriends, isAllSubs]);
 
   useEffect(() => {
-    !isAllSubs && isSubsChecked && dispatch(setPeople([...people, ...subs]));
-    !isAllFriends && isFriendsChecked && dispatch(setPeople([...people, ...friends]));
-    !isAllData && isAllChecked && dispatch(setPeople([...people, ...users]));
+    !isAllSubs && isSubsChecked && dispatch(setPeople([...subs]));
+    !isAllFriends && isFriendsChecked && dispatch(setPeople([...friends]));
+    !isAllData && isAllChecked && dispatch(setPeople([...users]));
   }, [subs, friends, users]);
 
   const onFriends: ChangeEventHandler<HTMLInputElement> = event => {

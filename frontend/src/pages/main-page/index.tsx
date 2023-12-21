@@ -8,7 +8,7 @@ import {
   useUserBlockHandler,
   useUserDeleteHandler
 } from "../../store";
-import React, {lazy, useState} from "react";
+import React, {useState} from "react";
 import {isAdmin} from "../../utils";
 
 export const MainPage = () => {

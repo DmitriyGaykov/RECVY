@@ -39,8 +39,13 @@ exception
 end;
 $$ language plpgsql;
 
+select count(*) from recvy.public.messages;
+
+
 select *
 from getChats('0');
+
+select * from photos;
 
 create or replace function isThisOrOther(value text, first text, sec text)
     returns text

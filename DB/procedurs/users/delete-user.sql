@@ -22,4 +22,5 @@ begin
 end;
 $$;
 
-select * from stickers;
+select * from recvy.public.blockedusers;
+call deleteUser('OtVfAupuOlDeC3weR9e50J1I1r73V0p804ye9tBgiTqIsHa7Np');

@@ -31,3 +31,5 @@ drop user APP_MAINADMIN;
 insert into users(id, login, firstname, lastname, password, aboutme, age) values ('0', 'RECVYADMIN', 'RECVY', 'ADMIN', '123123123', 'Администратор этого замечательного приложения', 20);
 call addphoto('0', 'admin.jpg');
 insert into usersroles(userid, role) values ('0', 'mainadmin');
+
+select * from getuserbyid('BrXl3wn6qatF69XV26h6Nk8askQ748TH4RpVefVKAspe30DZzr');

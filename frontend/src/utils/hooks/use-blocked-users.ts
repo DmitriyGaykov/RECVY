@@ -1,5 +1,5 @@
 import {usePages} from "./use-pages.ts";
-import {useLazyGetBlockedUsersQuery} from "../../store";
+import {clearPeople, setPeople, useAppDispatch, useLazyGetBlockedUsersQuery, useStoredPeople} from "../../store";
 import {useEffect, useState} from "react";
 import {User} from "../../models";
 
@@ -10,9 +10,13 @@ export const useBlockedUsers = () => {
   const {page, getYet, isAllData, setIsAllData, setDefault} = usePages();
   const [getUsersQuery] = useLazyGetBlockedUsersQuery();
 
+  const people = useStoredPeople();
+  const dispatch = useAppDispatch();
+
   const reset = () => {
     setDefault();
     setUsers([]);
+    dispatch(clearPeople());
   }
 
   const getUsers = async () => {
@@ -44,5 +48,9 @@ export const useBlockedUsers = () => {
     users?.length === 0 && setIsAllData(true);
   }, [users]);
 
-  return {users, getYet, onEnter, isAllData, getUsers};
+  useEffect(() => {
+    dispatch(setPeople(users));
+  }, [users])
+
+  return {users: people, getYet, onEnter, isAllData, getUsers};
 }

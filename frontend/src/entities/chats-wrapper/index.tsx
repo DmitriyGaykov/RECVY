@@ -1,7 +1,7 @@
 import {RedirectChatBlock, RedirectChatBlockProps} from "../redirect-chat-block";
 import React, {FC, useEffect} from "react";
 import {useChats, useOnChat} from "../../utils";
-import {ImageButton} from "../../components/buttons";
+import {ImageButton} from "../../components";
 import addSvg from './../../assets/images/add.svg';
 
 export const ChatsWrapper : FC = () => {

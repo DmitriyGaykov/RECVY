@@ -30,6 +30,8 @@ exception
 end;
 $$;
 
+select * from messageToJson();
+
 select *
 from users
 limit 1;
@@ -44,6 +46,7 @@ begin
 end;
 $$ language plpgsql;
 
+select * from users where id in ('1', '2','3', '4');
 
 call usersFromJson('[
   {

@@ -5,11 +5,13 @@ export type UsersStateType = {
   current: User;
   users: User[];
   people: User[];
+  usersOnline: string[];
 }
 
 const initialState: UsersStateType = {
   users: [],
-  people: []
+  people: [],
+  usersOnline: []
 }
 
 const usersSlice = createSlice({
@@ -36,9 +38,15 @@ const usersSlice = createSlice({
     },
     clearPeople(state): void {
       state.people = [];
+    },
+    addOnlineUser(state, { payload }: PayloadAction<string>) : void {
+      state.usersOnline = [...new Set<string>([...state.usersOnline, payload])];
+    },
+    removeUserFromOnline(state, { payload }: PayloadAction<string>): void {
+      state.usersOnline = state.usersOnline.filter(el => el !== payload);
     }
   }
 })
 
-export const {setCurrentUser, addPhoto, dellPhoto, setStoreUsers, clearUsers, setPeople, clearPeople } = usersSlice.actions;
+export const {setCurrentUser, addPhoto, dellPhoto, setStoreUsers, clearUsers, setPeople, clearPeople, addOnlineUser, removeUserFromOnline } = usersSlice.actions;
 export const usersReducer = usersSlice.reducer;
